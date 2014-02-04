@@ -11,7 +11,7 @@ function customerController($scope, customerFactory, MessageFactory, $log, $root
 				$scope.customers = data.data;
 
 			} else {
-				MessageFactory.prepareForBroadcast('Det oppstod en feil ved lasting av kunder', 'error');
+				MessageFactory.prepareForBroadcast('Det oppstod en feil ved lasting av kunder', 'label label-danger');
 			}
 		});
 	}
@@ -25,11 +25,13 @@ function customerController($scope, customerFactory, MessageFactory, $log, $root
 					$scope.customers.push(data. data);
 					$scope.formData = {};
 
-					MessageFactory.prepareForBroadcast('Ny kunde opprettet', 'success');
+					MessageFactory.prepareForBroadcast('Ny kunde opprettet', 'label label-success');
 				} else {
-					MessageFactory.prepareForBroadcast('Det oppstod en feil under oppretting av ny kunde', 'error');
+					MessageFactory.prepareForBroadcast('Det oppstod en feil under oppretting av ny kunde', 'label label-danger');
 				}
 			});	
+		} else {
+			MessageFactory.prepareForBroadcast('Kontroller felter med rød *', 'label label-warning');	
 		}
 	};
 
@@ -44,9 +46,9 @@ function customerController($scope, customerFactory, MessageFactory, $log, $root
 					}
 				}
 
-				MessageFactory.prepareForBroadcast('Kunde slettet', 'success');
+				MessageFactory.prepareForBroadcast('Kunde slettet', 'label label-success');
 			} else {
-				MessageFactory.prepareForBroadcast('Det oppstod en feil ved sletting av kunde', 'error');
+				MessageFactory.prepareForBroadcast('Det oppstod en feil ved sletting av kunde', 'label label-danger');
 			}
 		});
 	};

@@ -58,22 +58,34 @@
 
       <!-- Begin page content -->
       <div class="container">
-        <div class="page-header">
-          <h1>Kundebehandling</h1>
-        </div>
-        <p class="lead">
-        	<div data-ng-view=""></div>
-        </p>
-        
+          <div class="page-header">
+            <table style="width: 100%;">
+              <tr>
+                <td tyle="vertical-align: bottom;">
+                  <h1>Kundebehandling</h1>
+                </td>
+                <td class="messagearea">
+                  <span class="message-container" ng-controller="MessageController" ng-class="messageStyle" style="text-align: right;">
+                    {{ message }}
+                    <div style="display: none;"><timer interval="1000" countdown="5"/></div> 
+                  </span> 
+                </td>
+              </tr> 
+            </table>    
+          </div>  
+          <p class="lead">
+        	   <div data-ng-view=""></div>
+          </p>
       </div>
     </div>
 
-    <div id="footer">
-      <div class="container" ng-controller="MessageController">
-        <p class="text-muted" ng-class="messageStyle">{{ message }}</p> 
-        <div style="display: none;"><timer interval="1000" countdown="5"/></div> 
-      </div>      
-    </div>
+    <!--<div id="footer">-->
+      <!--<div class="container" ng-controller="MessageController" ng-class="messageStyle">
+        {{ message }}
+        <!--<p class="text-muted" ng-class="messageStyle">{{ message }}</p>-->
+        <!--<div style="display: none;"><timer interval="1000" countdown="5"/></div> 
+      </div>-->      
+    <!--</div>-->
 
 
     <!-- Third party script imports

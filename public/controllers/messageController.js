@@ -8,7 +8,8 @@ function MessageController($scope, MessageFactory, $log) {
 	
 	$scope.$on('timer-stopped', function (event, data){
 		$scope.$apply(function() {
-			$scope.message = "";	
+			$scope.message = "";
+			$scope.messageStyle = "noDisplay";	
 		});
     });
     

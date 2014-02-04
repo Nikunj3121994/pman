@@ -1,33 +1,49 @@
-<div>
-	<div class="container">
-		<!-- CUSTOMER LIST -->
-		<div id="customer-list" class="row">
-			<div class="col-sm-4 col-sm-offset-4">
+<div class="container">
+	<!-- CUSTOMER LIST -->
+	<div id="customer-list" class="row">
+		<div class="col-xs-6">
+			<div class="panel panel-default">
+			  	<div class="panel-heading">Kundeliste</div>
+			  	<div class="panel-body">
+			    	<table class="table table-hover">
+			    		<tr>
+			    			<th>ID</th>
+			    			<th>Navn</th>
+			    			<th></th>
+			    		</tr>
+						<tr ng-repeat="customer in customers">
+							<td>{{customer.idcustomer}}</td>
+							<td>{{customer.name}}</td>
+							<td>
+								<button type="button" style="border: 0px; background-color: transparent">
+									<span class="glyphicon glyphicon-remove" ng-click="deleteCustomer(customer.idcustomer)"></span></td>
+								</button>
+						</tr>
+					</table>
+			  	</div>
+			</div>
+		</div>
 
-				<!-- LOOP OVER THE CUSTOMERS IN $scope.customers -->
-				<div class="checkbox" ng-repeat="customer in customers">
-					<label>
-						<input type="checkbox" ng-click="deleteCustomer(customer.idcustomer)">{{ customer.name }} </label>
+		<div class="col-xs-6">
+			<div class="panel panel-default">
+			  	<div class="panel-heading">Kundeskjema</div>
+			  	<div class="panel-body">
+					<form name="customerForm" novalidate="">
+						<div class="form-group">
+							<div id="customer-form-grid" class="row">
+								<div class="col-xs-12 col-sm-6 col-md-8">
+									<input type="text" class="form-control text-center" name="customerName" 
+										ng-model="formData.name" required="" placeholder="Navn på kunde" />
+								</div>
+								<div class="col-xs-6 col-md-4">
+									<span class="error" ng-show="customerForm.customerName.$error.required">*</span>
+								</div>
+						</div>
+						<br/>
+						<button type="submit" class="btn btn-primary" ng-click="createCustomer()">Lagre</button>
+					</form>
 				</div>
-
 			</div>
 		</div>
-
-		<!-- FORM TO CREATE CUSTOMERS -->
-		<div id="customer-form" class="row">
-			<div class="col-sm-8 col-sm-offset-2 text-center">
-				<form name="customerForm">
-					<div class="form-group">
-						<input type="text" class="form-control input-lg text-center" name="customerName" 
-							ng-model="formData.name" required="" placeholder="Navn på kunde" />
-						<span class="error" ng-show="customerForm.customerName.$error.required">Må fylles ut</span>
-					</div>
-
-					<button type="submit" class="btn btn-primary btn-lg" ng-click="createCustomer()">Add</button>
-				</form>
-			</div>
-		</div>
-
 	</div>
-
 </div>
