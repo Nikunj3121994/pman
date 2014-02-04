@@ -1,0 +1,39 @@
+<div>
+	<div class="container">
+		<!-- CUSTOMER LIST -->
+		<div id="customer-list" class="row">
+			<div class="col-sm-4 col-sm-offset-4">
+
+				<!-- LOOP OVER THE CUSTOMERS IN $scope.customers -->
+				<div class="checkbox" ng-repeat="customer in customers">
+					<label>
+						<input type="checkbox" ng-click="deleteCustomer(customer.idcustomer)">
+						{{ customer.name }} </label>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- FORM TO CREATE CUSTOMERS -->
+		<div id="customer-form" class="row">
+			<div class="col-sm-8 col-sm-offset-2 text-center">
+				<form>
+					<div class="form-group">
+
+						<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+						<input type="text" class="form-control input-lg text-center" name="customerName" 
+							ng-model="formData.name" required>
+						<span class="error" ng-show="customer-form.customerName.$error.required">Required!</span>
+					</div>
+
+					<!-- createCustomer() WILL CREATE NEW CUSTOMER -->
+					<button type="submit" class="btn btn-primary btn-lg" ng-click="createCustomer()">
+						Add
+					</button>
+				</form>
+			</div>
+		</div>
+
+	</div>
+
+</div>
