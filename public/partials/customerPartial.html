@@ -7,8 +7,7 @@
 				<!-- LOOP OVER THE CUSTOMERS IN $scope.customers -->
 				<div class="checkbox" ng-repeat="customer in customers">
 					<label>
-						<input type="checkbox" ng-click="deleteCustomer(customer.idcustomer)">
-						{{ customer.name }} </label>
+						<input type="checkbox" ng-click="deleteCustomer(customer.idcustomer)">{{ customer.name }} </label>
 				</div>
 
 			</div>
@@ -17,19 +16,14 @@
 		<!-- FORM TO CREATE CUSTOMERS -->
 		<div id="customer-form" class="row">
 			<div class="col-sm-8 col-sm-offset-2 text-center">
-				<form>
+				<form name="customerForm">
 					<div class="form-group">
-
-						<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
 						<input type="text" class="form-control input-lg text-center" name="customerName" 
-							ng-model="formData.name" required>
-						<span class="error" ng-show="customer-form.customerName.$error.required">Required!</span>
+							ng-model="formData.name" required="" placeholder="Navn på kunde" />
+						<span class="error" ng-show="customerForm.customerName.$error.required">Må fylles ut</span>
 					</div>
 
-					<!-- createCustomer() WILL CREATE NEW CUSTOMER -->
-					<button type="submit" class="btn btn-primary btn-lg" ng-click="createCustomer()">
-						Add
-					</button>
+					<button type="submit" class="btn btn-primary btn-lg" ng-click="createCustomer()">Add</button>
 				</form>
 			</div>
 		</div>

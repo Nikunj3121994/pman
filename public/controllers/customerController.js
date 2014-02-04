@@ -19,16 +19,18 @@ function customerController($scope, customerFactory, MessageFactory, $log, $root
 	
 	// Create new customer using customerFactory
 	$scope.createCustomer = function() {
-		customerFactory.addCustomer($scope.formData).then(function(data) {
-			if(!$rootScope.RHE(data, true)) {
-				$scope.customers.push(data. data);
-				$scope.formData = {};
+		if( $scope.customerForm.customerName.$valid) {
+			customerFactory.addCustomer($scope.formData).then(function(data) {
+				if(!$rootScope.RHE(data, true)) {
+					$scope.customers.push(data. data);
+					$scope.formData = {};
 
-				MessageFactory.prepareForBroadcast('Ny kunde opprettet', 'success');
-			} else {
-				MessageFactory.prepareForBroadcast('Det oppstod en feil under oppretting av ny kunde', 'error');
-			}
-		});
+					MessageFactory.prepareForBroadcast('Ny kunde opprettet', 'success');
+				} else {
+					MessageFactory.prepareForBroadcast('Det oppstod en feil under oppretting av ny kunde', 'error');
+				}
+			});	
+		}
 	};
 
 	// delete customer using customerFactory
