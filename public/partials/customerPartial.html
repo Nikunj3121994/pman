@@ -1,5 +1,4 @@
 <div class="container">
-	<!-- CUSTOMER LIST -->
 	<div id="customer-list" class="row">
 		<div class="col-xs-6">
 			<div class="panel panel-default">
@@ -15,9 +14,14 @@
 							<td>{{customer.idcustomer}}</td>
 							<td>{{customer.name}}</td>
 							<td>
-								<button type="button" style="border: 0px; background-color: transparent">
-									<span class="glyphicon glyphicon-remove" ng-click="deleteCustomer(customer.idcustomer)"></span></td>
+								<button type="button" alt="Slett kunde" style="border: 1px; background-color: transparent">
+									<span class="glyphicon glyphicon-remove" ng-click="deleteCustomer(customer.idcustomer)"></span>
 								</button>
+								<button type="button" alt="Rediger kunde" style="border: 1px; background-color: transparent">
+									<span class="glyphicon glyphicon-pencil" ng-click="editCustomer($index)"></span>
+								</button>
+							</td>
+
 						</tr>
 					</table>
 			  	</div>
@@ -36,11 +40,15 @@
 										ng-model="formData.name" required="" placeholder="Navn på kunde" />
 								</div>
 								<div class="col-xs-6 col-md-4">
-									<span class="error" ng-show="customerForm.customerName.$error.required">*</span>
+									<span class="error" ng-show="customerForm.customerName.$error.required">
+									<span class="glyphicon glyphicon-minus" />
+									</span>
 								</div>
 						</div>
 						<br/>
-						<button type="submit" class="btn btn-primary" ng-click="createCustomer()">Lagre</button>
+						<button type="submit" class="btn btn-primary" ng-show="showSaveButton" ng-click="createCustomer()">Lagre</button>
+						<button type="submit" class="btn btn-primary" ng-show="showUpdateButton" ng-click="updateCustomer(customerEditedID)">Oppdater</button>
+						<button type="reset" class="btn btn-default" ng-show="showCancelButton" ng-click="resetCustomerForm()">Avbryt</button>
 					</form>
 				</div>
 			</div>

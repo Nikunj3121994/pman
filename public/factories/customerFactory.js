@@ -18,6 +18,22 @@ function customerFactory($http, $log) {
 	     	return promise;
 	    }, 
 	    
+	    updateCustomer:function(formData, id) {
+	    	var promise = $http({
+	        	method: 'PUT',
+	            url: '/api/customers/' + id,
+	            data: formData,
+	            timeout: 10000
+	        }).then(function(response) {
+	        	$log.info('Retrieved data after update: ',response);
+	           	return response;  
+	        },  function(reason) {
+	        	$log.error("PUT request Failed: ", reason);
+	     	});
+		 
+	     	return promise;
+	    },
+
 	    addCustomer:function(formData) {
 	    	var promise = $http({
 	        	method: 'POST',

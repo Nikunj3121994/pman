@@ -113,7 +113,7 @@ app.put('/api/customers/:id', function (req, res){
 	    		if(!QueryHasErrors(err, res)) {
 	    			post.idcustomer = req.params.id;
 	    			console.log('Updated Customer: ' + JSON.stringify(post));
-	  				ReturnResults(res, post);
+	  				ReturnResults(res, post, 200);
 	  			}
 
 	    		connection.release();

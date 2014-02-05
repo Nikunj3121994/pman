@@ -6,9 +6,10 @@
   "ignore": [
   ],
   "dependencies": {
-    "bootstrap": 		">= 3.1.0",
+    "bootstrap": 		"3.1.0",
     "angular": 			"",
     "angular-route": 	"",
-    "angular-timer":	""
+    "angular-timer":	"",
+    "bootbox":        "4.1.0"
   }
 }
