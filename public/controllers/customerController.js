@@ -9,7 +9,6 @@ function customerController($scope, customerFactory, MessageFactory, $log, $root
 		customerFactory.getCustomers().then(function(data) {
 			if(!$rootScope.RHE(data, true)) {
 				$scope.customers = data.data;
-
 			} else {
 				MessageFactory.prepareForBroadcast('Det oppstod en feil ved lasting av kunder', 'label label-danger');
 			}
@@ -18,9 +17,28 @@ function customerController($scope, customerFactory, MessageFactory, $log, $root
 		$scope.showSaveButton = true;
 		$scope.showUpdateButton = false;	
 		$scope.showCancelButton = true;	
+
+		$rootScope.pageHeader = 'Kundebehandling';
+
+		$scope.currentPage = 0;
+    	$scope.pageSize = 10;	
 	}
+
+	$scope.changePage=function(add){
+        if(!add) {
+        	if($scope.currentPage>0)
+        		$scope.currentPage = $scope.currentPage-1;
+        } else {
+        	if($scope.currentPage<$scope.numberOfPages()-1) {
+        		$scope.currentPage = $scope.currentPage+1;
+        	}
+        }       
+    }
 	
-	
+	$scope.numberOfPages=function(){
+        return Math.ceil($scope.filteredCustomers.length/$scope.pageSize);                
+    }
+
 	// Create new customer using customerFactory
 	$scope.createCustomer = function() {
 		if( $scope.customerForm.$valid) {
@@ -68,15 +86,20 @@ function customerController($scope, customerFactory, MessageFactory, $log, $root
 	$scope.editCustomer = function(index) {
 		$scope.showSaveButton = false;
 		$scope.showUpdateButton = true;
-		$scope.customerEditedID = $scope.customers[index].idcustomer;
-		$scope.formData = $scope.customers[index];
+		$scope.customerEditedID = $scope.filteredCustomers[index].idcustomer;
+		$scope.formData = $scope.filteredCustomers[index];
 	};
 
-	// Put customer to edit in edit form
+	// Reset edit form
 	$scope.resetCustomerForm = function() {
 		$scope.formData = {};
 		$scope.showSaveButton = true;
 		$scope.showUpdateButton = false;	
+	};
+
+	// Reset search field
+	$scope.resetSearch = function() {
+		$scope.searchCustomer = '';
 	};
 
 	// delete customer using customerFactory

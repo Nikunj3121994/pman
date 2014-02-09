@@ -10,16 +10,26 @@ var pmanApp = angular.module('pmanApp', ['ngRoute', 'timer']).run(
 		};	
 	});
 
+pmanApp.filter('startFrom', function() {
+    return function(input, start) {
+        start = +start; //parse to int
+        return input.slice(start);
+    }
+});
+
 //Inject factory in module
 pmanApp.factory('customerFactory', customerFactory);
 pmanApp.factory('MessageFactory', MessageFactory);
+pmanApp.factory('projectFactory', projectFactory);
 
-//Inject controller in module
+//Inject core controllers to "always visible" parts of app
+pmanApp.controller('headerController', headerController);
 pmanApp.controller('MessageController', MessageController);
 
-
+//Inject needed "modules" to controllers
 MessageController.$inject = ['$scope', 'MessageFactory', '$log'];
 customerController.$inject = ['$scope', 'customerFactory', 'MessageFactory', '$log', '$rootScope'];
+projectController.$inject = ['$scope', 'projectFactory', 'MessageFactory', '$log', '$rootScope', 'customerFactory'];
 
 
 

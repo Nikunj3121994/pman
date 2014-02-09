@@ -5,6 +5,11 @@ pmanApp.config(function($routeProvider) {
 				controller: 'customerController',
 				templateUrl: 'partials/customerPartial.html'
 			})
+		.when('/projects',
+			{
+				controller: 'projectController',
+				templateUrl: 'partials/projectPartial.html'
+			})
 		.when('/test',
 			{
 				controller: 'customerController',
