@@ -21,7 +21,7 @@
 							<td>{{project.title}}</td>
 							<td>
 								<button type="button" alt="Slett prosjekt" style="border: 1px; background-color: transparent">
-									<span class="glyphicon glyphicon-remove" ng-click="deleteProject(project.idproject)"></span>
+									<span class="glyphicon glyphicon-remove" ng-click="deleteProject(project._id)"></span>
 								</button>
 								<button type="button" alt="Rediger prosjekt" style="border: 1px; background-color: transparent">
 									<span class="glyphicon glyphicon-pencil" ng-click="editProject($index)"></span>
@@ -68,10 +68,10 @@
 							<div id="project-form-grid" class="row">
 								<div class="col-xs-12 col-sm-6 col-md-8">
 									<select class="form-control text-center" 
-											name="fkIdCustomer" 
-											ng-model="formData.fkIdCustomer" 
+											name="_customer" 
+											ng-model="formData._customer" 
 											required="" 
-											ng-options="customer.idcustomer as customer.name for customer in customers">
+											ng-options="customer._id as customer.name for customer in customers">
 									  <!--<option class="text-center" ng-repeat="customer in customers" value="{{customer.idcustomer}}">{{customer.name}}</option>-->
 									  <option value="" style="display: none;">-- Kunde ---</option>
 									</select>

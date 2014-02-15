@@ -63,7 +63,7 @@ function customerController($scope, customerFactory, MessageFactory, $log, $root
 			customerFactory.updateCustomer($scope.formData, id).then(function(data) {
 				if(!$rootScope.RHE(data, true)) {
 					for (var i = 0; i < $scope.customers.length; i++) {
-						if ($scope.customers[i].idcustomer === id) {
+						if ($scope.customers[i]._id === id) {
 							$scope.customers[i] = data.data;
 							break;
 						}
@@ -86,7 +86,7 @@ function customerController($scope, customerFactory, MessageFactory, $log, $root
 	$scope.editCustomer = function(index) {
 		$scope.showSaveButton = false;
 		$scope.showUpdateButton = true;
-		$scope.customerEditedID = $scope.filteredCustomers[index].idcustomer;
+		$scope.customerEditedID = $scope.filteredCustomers[index]._id;
 		$scope.formData = $scope.filteredCustomers[index];
 	};
 
@@ -109,7 +109,7 @@ function customerController($scope, customerFactory, MessageFactory, $log, $root
 				customerFactory.deleteCustomer(id).then(function(data) {
 					if(!$rootScope.RHE(data, false)) {
 						for (var i = 0; i < $scope.customers.length; i++) {
-							if ($scope.customers[i].idcustomer === id) {
+							if ($scope.customers[i]._id === id) {
 								$scope.customers.splice(i, 1);
 								break;
 							}

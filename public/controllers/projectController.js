@@ -74,7 +74,7 @@ function projectController($scope, projectFactory, MessageFactory, $log, $rootSc
 			projectFactory.updateProject($scope.formData, id).then(function(data) {
 				if(!$rootScope.RHE(data, true)) {
 					for (var i = 0; i < $scope.projects.length; i++) {
-						if ($scope.projects[i].idproject === id) {
+						if ($scope.projects[i]._id === id) {
 							$scope.projects[i] = data.data;
 							break;
 						}
@@ -97,7 +97,7 @@ function projectController($scope, projectFactory, MessageFactory, $log, $rootSc
 	$scope.editProject = function(index) {
 		$scope.showSaveButton = false;
 		$scope.showUpdateButton = true;
-		$scope.projectEditedID = $scope.filteredProjects[index].idproject;
+		$scope.projectEditedID = $scope.filteredProjects[index]._id;
 		$scope.formData = $scope.filteredProjects[index];
 	};
 
@@ -120,7 +120,7 @@ function projectController($scope, projectFactory, MessageFactory, $log, $rootSc
 				projectFactory.deleteProject(id).then(function(data) {
 					if(!$rootScope.RHE(data, false)) {
 						for (var i = 0; i < $scope.projects.length; i++) {
-							if ($scope.projects[i].idproject === id) {
+							if ($scope.projects[i]._id === id) {
 								$scope.projects.splice(i, 1);
 								break;
 							}
