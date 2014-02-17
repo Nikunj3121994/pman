@@ -77,7 +77,22 @@
 									</select>
 								</div>
 								<div class="col-xs-6 col-md-4">
-									<span class="error" ng-show="projectForm.fkIdCustomer.$error.required">
+									<span class="error" ng-show="projectForm._customer.$error.required">
+									<span class="glyphicon glyphicon-minus" /></span>
+								</div>
+							</div><br/>
+							<div id="project-form-grid" class="row">
+								<div class="col-xs-12 col-sm-6 col-md-8">
+									<select class="form-control text-center" 
+											name="_leader" 
+											ng-model="formData._leader" 
+											required="" 
+											ng-options="leader._id as leader.name for leader in leaders">
+									  <option value="" style="display: none;">-- Prosjektleder ---</option>
+									</select>
+								</div>
+								<div class="col-xs-6 col-md-4">
+									<span class="error" ng-show="projectForm._leader.$error.required">
 									<span class="glyphicon glyphicon-minus" /></span>
 								</div>
 							</div>

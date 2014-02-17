@@ -83,7 +83,10 @@ module.exports = function(app, pool, ConnectionErrorCheck, QueryHasErrors, Retur
 		if(pool) { //MySql used as database
 			pool.getConnection(function(err, connection) {
 				if(!ConnectionErrorCheck(err, res)) {
-					var post = {title: req.body.title, idproject: req.body.idproject, fkIdCustomer: req.body.fkIdCustomer };
+					var post = {title: req.body.title, 
+								idproject: req.body.idproject, 
+								_customer: req.body._customer,
+								_leader: req.body._leader };
 					
 			  		connection.query( 'INSERT INTO project SET ?', post, function(err, rows) {
 			  			if(!QueryHasErrors(err, res)) {
@@ -96,7 +99,10 @@ module.exports = function(app, pool, ConnectionErrorCheck, QueryHasErrors, Retur
 				} 
 			});
 		} else { //MongoDB used as database
-			var newProject = new Project ({title: req.body.title, idproject: req.body.idproject, _customer: req.body._customer});
+			var newProject = new Project ({title: req.body.title, 
+											idproject: req.body.idproject, 
+											_customer: req.body._customer,
+											_leader: req.body._leader});
 
 			newProject.save(function (err) {
 				if(!QueryHasErrors(err, res)) {
@@ -112,7 +118,10 @@ module.exports = function(app, pool, ConnectionErrorCheck, QueryHasErrors, Retur
 		if(pool) { //MySql used as database
 			pool.getConnection(function(err, connection) {
 				if(!ConnectionErrorCheck(err, res)) {
-					var post = {title: req.body.title, idproject: req.body.idproject, fkIdCustomer: req.body.fkIdCustomer };
+					var post = {title: req.body.title, 
+								idproject: req.body.idproject, 
+								_customer: req.body._customer,
+								_leader: req.body._leader };
 					
 					console.log(post);
 					
@@ -129,7 +138,10 @@ module.exports = function(app, pool, ConnectionErrorCheck, QueryHasErrors, Retur
 			});
 		} else { //MongoDB used as database
 			var query = { _id: req.params.id };
-			var update = { title: req.body.title, idproject: req.body.idproject, _customer: req.body._customer };
+			var update = { title: req.body.title, 
+							idproject: req.body.idproject, 
+							_customer: req.body._customer,
+							_leader: req.body._leader };
 			Project.findOneAndUpdate(query, update, null, function(err, result) {
 				if(!QueryHasErrors(err, res)) {
 					console.log('Updated Project: ' + JSON.stringify(result));

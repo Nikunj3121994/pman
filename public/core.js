@@ -21,6 +21,7 @@ pmanApp.filter('startFrom', function() {
 pmanApp.factory('customerFactory', customerFactory);
 pmanApp.factory('MessageFactory', MessageFactory);
 pmanApp.factory('projectFactory', projectFactory);
+pmanApp.factory('leaderFactory', leaderFactory);
 
 //Inject core controllers to "always visible" parts of app
 pmanApp.controller('headerController', headerController);
@@ -29,7 +30,8 @@ pmanApp.controller('MessageController', MessageController);
 //Inject needed "modules" to controllers
 MessageController.$inject = ['$scope', 'MessageFactory', '$log'];
 customerController.$inject = ['$scope', 'customerFactory', 'MessageFactory', '$log', '$rootScope'];
-projectController.$inject = ['$scope', 'projectFactory', 'MessageFactory', '$log', '$rootScope', 'customerFactory'];
+leaderController.$inject = ['$scope', 'leaderFactory', 'MessageFactory', '$log', '$rootScope'];
+projectController.$inject = ['$scope', 'projectFactory', 'MessageFactory', '$log', '$rootScope', 'customerFactory', 'leaderFactory'];
 
 
 

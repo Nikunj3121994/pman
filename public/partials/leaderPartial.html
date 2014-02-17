@@ -1,0 +1,70 @@
+<div class="container">
+	<div id="leader-list" class="row">
+		<div class="col-xs-6">
+			<div class="panel panel-default">
+			  	<div class="panel-heading">Prosjektlederliste</div>
+			  	<div class="panel-body">
+			  		<div class="input-group">
+			            <input type="text" class="form-control" placeholder="Søk i prosjektleder" name="srch-term" id="srch-term" ng-model="searchLeader">
+			            <div class="input-group-btn">
+			                <button class="btn btn-default" ng-click="resetSearch()" ng-model="searchLeader"><i class="glyphicon glyphicon-remove-circle"></i></button>
+			            </div>
+			        </div><br/>
+			    	<table class="table table-hover">
+			    		<tr>
+			    			<th>ID</th>
+			    			<th>Navn</th>
+			    			<th></th>
+			    		</tr>
+						<tr ng-repeat="leader in (filteredLeaders = (leaders | filter:searchLeader)) | startFrom:currentPage*pageSize | limitTo:pageSize">
+							<td>{{leader._id}}</td>
+							<td>{{leader.name}}</td>
+							<td>
+								<button type="button" alt="Slett prosjektleder" style="border: 1px; background-color: transparent">
+									<span class="glyphicon glyphicon-remove" ng-click="deleteLeader(leader._id)"></span>
+								</button>
+								<button type="button" alt="Rediger prosjektleder" style="border: 1px; background-color: transparent">
+									<span class="glyphicon glyphicon-pencil" ng-click="editLeader($index)"></span>
+								</button>
+							</td>
+
+						</tr>
+					</table>
+
+					<ul class="pagination">
+					  <li><a href="" ng-click="changePage(false)">&laquo;</a></li>
+					  <li><span>{{currentPage+1}}/{{numberOfPages()}}</span></li>
+					  <li><a href="" ng-click="changePage(true)">&raquo;</a></li>
+					</ul>
+
+			  	</div>
+			</div>
+		</div>
+
+		<div class="col-xs-6">
+			<div class="panel panel-default">
+			  	<div class="panel-heading">Prosjektlederskjema</div>
+			  	<div class="panel-body">
+					<form name="leaderForm" novalidate="">
+						<div class="form-group">
+							<div id="leader-form-grid" class="row">
+								<div class="col-xs-12 col-sm-6 col-md-8">
+									<input type="text" class="form-control" name="leaderName" 
+										ng-model="formData.name" required="" placeholder="Navn på prosjektleder" />
+								</div>
+								<div class="col-xs-6 col-md-4">
+									<span class="error" ng-show="leaderForm.leaderName.$error.required">
+									<span class="glyphicon glyphicon-minus" />
+									</span>
+								</div>
+						</div>
+						<br/>
+						<button type="submit" class="btn btn-primary" ng-show="showSaveButton" ng-click="createLeader()">Lagre</button>
+						<button type="submit" class="btn btn-primary" ng-show="showUpdateButton" ng-click="updateLeader(leaderEditedID)">Oppdater</button>
+						<button type="reset" class="btn btn-default" ng-show="showCancelButton" ng-click="resetLeaderForm()">Avbryt</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

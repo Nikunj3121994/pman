@@ -1,4 +1,4 @@
-function projectController($scope, projectFactory, MessageFactory, $log, $rootScope, customerFactory) {
+function projectController($scope, projectFactory, MessageFactory, $log, $rootScope, customerFactory, leaderFactory) {
 	$scope.formData = {};
 	$scope.projects = [];
 	
@@ -21,6 +21,15 @@ function projectController($scope, projectFactory, MessageFactory, $log, $rootSc
 
 			} else {
 				MessageFactory.prepareForBroadcast('Det oppstod en feil ved lasting av kunder', 'label label-danger');
+			}
+		});
+
+		leaderFactory.getLeaders().then(function(data) {
+			if(!$rootScope.RHE(data, true)) {
+				$scope.leaders = data.data;
+
+			} else {
+				MessageFactory.prepareForBroadcast('Det oppstod en feil ved lasting av prosjektledere', 'label label-danger');
 			}
 		});
 

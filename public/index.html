@@ -37,6 +37,7 @@
             <ul class="nav navbar-nav">
               <li class="active" ng-class="{ active: isActive('/')}"><a href="./">Kunder</a></li>
               <li ng-class="{ active: isActive('/projects')}"><a href="./#projects">Prosjekt</a></li>
+              <li ng-class="{ active: isActive('/leaders')}"><a href="./#leaders">Prosjektledere</a></li>
               <!--<li><a href="http://getbootstrap.com/examples/sticky-footer-navbar/#contact">Contact</a></li>
               <li class="dropdown">
                 <a href="./Sticky Footer Navbar Template for Bootstrap_files/Sticky Footer Navbar Template for Bootstrap.htm" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
@@ -102,11 +103,13 @@
     ================================================== -->
     <script src="factories/customerFactory.js"></script>
     <script src="factories/projectFactory.js"></script>
+    <script src="factories/leaderFactory.js"></script>
     <script src="factories/messageFactory.js"></script>
     
     <!-- Application spesific controller script imports
     ================================================== -->
     <script src="controllers/customerController.js"></script>
+    <script src="controllers/leaderController.js"></script>
     <script src="controllers/projectController.js"></script>
     <script src="controllers/messageController.js"></script>
     <script src="controllers/headerController.js"></script>
