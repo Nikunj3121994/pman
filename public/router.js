@@ -15,6 +15,11 @@ pmanApp.config(function($routeProvider) {
 				controller: 'leaderController',
 				templateUrl: 'partials/leaderPartial.html'
 			})
+		.when('/calculations',
+			{
+				controller: 'calculationController',
+				templateUrl: 'partials/calculationPartial.html'
+			})
 		.when('/test',
 			{
 				controller: 'customerController',

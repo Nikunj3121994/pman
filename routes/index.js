@@ -29,6 +29,7 @@ module.exports = function(app, pool) {
 	require('./main')(app, pool);
 	require('./customers')(app, pool, ConnectionErrorCheck, QueryHasErrors, ReturnResults);
 	require('./leaders')(app, pool, ConnectionErrorCheck, QueryHasErrors, ReturnResults);
+	require('./calculations')(app, pool, ConnectionErrorCheck, QueryHasErrors, ReturnResults);
 	require('./projects')(app, pool, ConnectionErrorCheck, QueryHasErrors, ReturnResults);
 
 };

@@ -22,6 +22,7 @@ pmanApp.factory('customerFactory', customerFactory);
 pmanApp.factory('MessageFactory', MessageFactory);
 pmanApp.factory('projectFactory', projectFactory);
 pmanApp.factory('leaderFactory', leaderFactory);
+pmanApp.factory('calculationFactory', calculationFactory);
 
 //Inject core controllers to "always visible" parts of app
 pmanApp.controller('headerController', headerController);
@@ -31,6 +32,7 @@ pmanApp.controller('MessageController', MessageController);
 MessageController.$inject = ['$scope', 'MessageFactory', '$log'];
 customerController.$inject = ['$scope', 'customerFactory', 'MessageFactory', '$log', '$rootScope'];
 leaderController.$inject = ['$scope', 'leaderFactory', 'MessageFactory', '$log', '$rootScope'];
+calculationController.$inject = ['$scope', 'calculationFactory', 'MessageFactory', '$log', '$rootScope'];
 projectController.$inject = ['$scope', 'projectFactory', 'MessageFactory', '$log', '$rootScope', 'customerFactory', 'leaderFactory'];
 
 
