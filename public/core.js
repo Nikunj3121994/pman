@@ -1,5 +1,5 @@
 //Define module
-var pmanApp = angular.module('pmanApp', ['ngRoute', 'timer']).run(
+var pmanApp = angular.module('pmanApp', ['ngRoute', 'timer', 'ui.bootstrap']).run(
 	function($rootScope){
 		$rootScope.RHE = function(data, expectsObject) {
 			if(data === undefined || ( data.data === undefined && expectsObject)) {				
@@ -30,10 +30,13 @@ pmanApp.controller('MessageController', MessageController);
 
 //Inject needed "modules" to controllers
 MessageController.$inject = ['$scope', 'MessageFactory', '$log'];
-customerController.$inject = ['$scope', 'customerFactory', 'MessageFactory', '$log', '$rootScope'];
-leaderController.$inject = ['$scope', 'leaderFactory', 'MessageFactory', '$log', '$rootScope'];
+customerController.$inject = ['$scope', 'customerFactory', 'MessageFactory', '$log', '$rootScope', '$modal'];
+customerModalController.$inject = ['$scope', '$modalInstance','customerFactory', 'MessageFactory', '$log', '$rootScope'];
+leaderController.$inject = ['$scope', 'leaderFactory', 'MessageFactory', '$log', '$rootScope', '$modal'];
+leaderModalController.$inject = ['$scope', '$modalInstance','leaderFactory', 'MessageFactory', '$log', '$rootScope'];
 calculationController.$inject = ['$scope', 'calculationFactory', 'MessageFactory', '$log', '$rootScope'];
-projectController.$inject = ['$scope', 'projectFactory', 'MessageFactory', '$log', '$rootScope', 'customerFactory', 'leaderFactory'];
+projectController.$inject = ['$scope', 'projectFactory', 'MessageFactory', '$log', '$rootScope', 'customerFactory', 'leaderFactory', '$modal'];
+projectModalController.$inject = ['$scope', '$modalInstance','projectFactory', 'MessageFactory', '$log', '$rootScope', 'customerFactory', 'leaderFactory'];
 
 
 

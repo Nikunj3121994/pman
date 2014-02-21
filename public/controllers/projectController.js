@@ -1,4 +1,4 @@
-function projectController($scope, projectFactory, MessageFactory, $log, $rootScope, customerFactory, leaderFactory) {
+function projectController($scope, projectFactory, MessageFactory, $log, $rootScope, customerFactory, leaderFactory, $modal) {
 	$scope.formData = {};
 	$scope.projects = [];
 	
@@ -60,7 +60,7 @@ function projectController($scope, projectFactory, MessageFactory, $log, $rootSc
 	
 	
 	// Create new project using projectFactory
-	$scope.createProject = function() {
+	/*$scope.createProject = function() {
 		if( $scope.projectForm.$valid) {
 			projectFactory.addProject($scope.formData).then(function(data) {
 				if(!$rootScope.RHE(data, true)) {
@@ -75,10 +75,10 @@ function projectController($scope, projectFactory, MessageFactory, $log, $rootSc
 		} else {
 			MessageFactory.prepareForBroadcast('Kontroller felter med rød -', 'label label-warning');	
 		}
-	};
+	};*/
 
 	// Create new project using projectFactory
-	$scope.updateProject = function(id) {
+	/*$scope.updateProject = function(id) {
 		if( $scope.projectForm.$valid) {
 			projectFactory.updateProject($scope.formData, id).then(function(data) {
 				if(!$rootScope.RHE(data, true)) {
@@ -100,15 +100,34 @@ function projectController($scope, projectFactory, MessageFactory, $log, $rootSc
 		} else {
 			MessageFactory.prepareForBroadcast('Kontroller felter med rød -', 'label label-warning');	
 		}
-	};
+	};*/
 
 	// Put project to edit in edit form
 	$scope.editProject = function(index) {
 		$scope.showSaveButton = false;
 		$scope.showUpdateButton = true;
 		$scope.projectEditedID = $scope.filteredProjects[index]._id;
-		$scope.formData = $scope.filteredProjects[index];
+		
+		$scope.formData = {__v: $scope.filteredProjects[index].__v,
+						   _id: $scope.filteredProjects[index]._id, 
+						   title: $scope.filteredProjects[index].title,
+						   idproject: $scope.filteredProjects[index].idproject,
+						   _customer: $scope.filteredProjects[index]._customer,
+						   _leader: $scope.filteredProjects[index]._leader }; 
+		$scope.openProjectModal(); 
 	};
+
+	$scope.openProjectModal = function () {
+	    var modalInstance = $modal.open({
+	      	templateUrl: 'partials/projectModalPartial.html',
+	      	controller: 'projectModalController',
+	      	scope: $scope
+	    });	
+
+	    modalInstance.result.then(function (result) {
+	    	MessageFactory.prepareForBroadcast('Prosjekt ' + result, 'label label-success');
+	    });
+  	};
 
 	// reset edit form
 	$scope.resetProjectForm = function() {

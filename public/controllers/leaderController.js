@@ -1,4 +1,4 @@
-function leaderController($scope, leaderFactory, MessageFactory, $log, $rootScope) {
+function leaderController($scope, leaderFactory, MessageFactory, $log, $rootScope, $modal) {
 	$scope.formData = {};
 	$scope.leaders = [];
 	
@@ -40,7 +40,7 @@ function leaderController($scope, leaderFactory, MessageFactory, $log, $rootScop
     }
 
 	// Create new leader using leaderFactory
-	$scope.createLeader = function() {
+	/*$scope.createLeader = function() {
 		if( $scope.leaderForm.$valid) {
 			leaderFactory.addLeader($scope.formData).then(function(data) {
 				if(!$rootScope.RHE(data, true)) {
@@ -55,10 +55,10 @@ function leaderController($scope, leaderFactory, MessageFactory, $log, $rootScop
 		} else {
 			MessageFactory.prepareForBroadcast('Kontroller felter med rød -', 'label label-warning');	
 		}
-	};
+	};*/
 
 	// Create new leader using leaderFactory
-	$scope.updateLeader = function(id) {
+	/*$scope.updateLeader = function(id) {
 		if( $scope.leaderForm.$valid) {
 			leaderFactory.updateLeader($scope.formData, id).then(function(data) {
 				if(!$rootScope.RHE(data, true)) {
@@ -80,14 +80,20 @@ function leaderController($scope, leaderFactory, MessageFactory, $log, $rootScop
 		} else {
 			MessageFactory.prepareForBroadcast('Kontroller felter med rød -', 'label label-warning');	
 		}
-	};
+	};*/
 
 	// Put leader to edit in edit form
 	$scope.editLeader = function(index) {
 		$scope.showSaveButton = false;
 		$scope.showUpdateButton = true;
 		$scope.leaderEditedID = $scope.filteredLeaders[index]._id;
-		$scope.formData = $scope.filteredLeaders[index];
+		
+		$scope.formData = {__v: $scope.filteredLeaders[index].__v,
+						   _id: $scope.filteredLeaders[index]._id, 
+						   name: $scope.filteredLeaders[index].name }; //$scope.filteredCustomers[index];
+		$scope.openLeaderModal(); 
+
+
 	};
 
 	// Reset edit form
@@ -101,6 +107,18 @@ function leaderController($scope, leaderFactory, MessageFactory, $log, $rootScop
 	$scope.resetSearch = function() {
 		$scope.searchLeader = '';
 	};
+
+	$scope.openLeaderModal = function () {
+	    var modalInstance = $modal.open({
+	      	templateUrl: 'partials/leaderModalPartial.html',
+	      	controller: 'leaderModalController',
+	      	scope: $scope
+	    });	
+
+	    modalInstance.result.then(function (result) {
+	    	MessageFactory.prepareForBroadcast('Prosjektleder ' + result, 'label label-success');
+	    });
+  	};
 
 	// delete leader using leaderFactory
 	$scope.deleteLeader = function(id) {

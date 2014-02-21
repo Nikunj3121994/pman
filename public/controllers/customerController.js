@@ -1,4 +1,4 @@
-function customerController($scope, customerFactory, MessageFactory, $log, $rootScope) {
+function customerController($scope, customerFactory, MessageFactory, $log, $rootScope, $modal) {
 	$scope.formData = {};
 	$scope.customers = [];
 	
@@ -40,7 +40,7 @@ function customerController($scope, customerFactory, MessageFactory, $log, $root
     }
 
 	// Create new customer using customerFactory
-	$scope.createCustomer = function() {
+	/*$scope.createCustomer = function() {
 		if( $scope.customerForm.$valid) {
 			customerFactory.addCustomer($scope.formData).then(function(data) {
 				if(!$rootScope.RHE(data, true)) {
@@ -55,10 +55,11 @@ function customerController($scope, customerFactory, MessageFactory, $log, $root
 		} else {
 			MessageFactory.prepareForBroadcast('Kontroller felter med rød -', 'label label-warning');	
 		}
-	};
+	};*/
 
-	// Create new customer using customerFactory
-	$scope.updateCustomer = function(id) {
+
+	// Update new customer using customerFactory
+	/*$scope.updateCustomer = function(id) {
 		if( $scope.customerForm.$valid) {
 			customerFactory.updateCustomer($scope.formData, id).then(function(data) {
 				if(!$rootScope.RHE(data, true)) {
@@ -80,14 +81,18 @@ function customerController($scope, customerFactory, MessageFactory, $log, $root
 		} else {
 			MessageFactory.prepareForBroadcast('Kontroller felter med rød -', 'label label-warning');	
 		}
-	};
+	};*/
 
 	// Put customer to edit in edit form
 	$scope.editCustomer = function(index) {
 		$scope.showSaveButton = false;
 		$scope.showUpdateButton = true;
 		$scope.customerEditedID = $scope.filteredCustomers[index]._id;
-		$scope.formData = $scope.filteredCustomers[index];
+
+		$scope.formData = {__v: $scope.filteredCustomers[index].__v,
+						   _id: $scope.filteredCustomers[index]._id, 
+						   name: $scope.filteredCustomers[index].name }; //$scope.filteredCustomers[index];
+		$scope.openCustomerModal(); 
 	};
 
 	// Reset edit form
@@ -101,6 +106,18 @@ function customerController($scope, customerFactory, MessageFactory, $log, $root
 	$scope.resetSearch = function() {
 		$scope.searchCustomer = '';
 	};
+
+	$scope.openCustomerModal = function () {
+	    var modalInstance = $modal.open({
+	      	templateUrl: 'partials/customerModalPartial.html',
+	      	controller: 'customerModalController',
+	      	scope: $scope
+	    });	
+
+	    modalInstance.result.then(function (result) {
+	    	MessageFactory.prepareForBroadcast('Kunde ' + result, 'label label-success');
+	    });
+  	};
 
 	// delete customer using customerFactory
 	$scope.deleteCustomer = function(id) {

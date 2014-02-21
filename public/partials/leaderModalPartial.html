@@ -1,0 +1,33 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" ng-click="cancel()">&times;</button>
+      <h4 class="modal-title">Prosjektlederskjema</h4>
+    </div>
+    <div class="modal-body">
+      <form name="leaderForm" novalidate="">
+			<div class="form-group">
+				<div id="leader-form-grid" class="row">
+					<div class="col-xs-12 col-sm-6 col-md-8">
+						<input type="text" class="form-control" name="leaderName" 
+							ng-model="formData.name" required="" placeholder="Navn på prosjektleder" />
+					</div>
+					<div class="col-xs-6 col-md-4" ng-show="leaderForm.$dirty && leaderForm.$invalid">
+						<span class="error" ng-show="leaderForm.																																												.$error.required">
+						<span class="glyphicon glyphicon-minus" />
+						</span>
+					</div>
+			</div>
+			<br/>
+		</form><br/>
+		<span class="message-container" ng-controller="MessageController" ng-class="messageStyle" style="text-align: right;">
+        	{{ message }}
+        <div style="display: none;"><timer interval="1000" countdown="5"/></div> 
+    </div>
+    <div class="modal-footer">
+		<button type="submit" class="btn btn-primary" ng-if="showSaveButton" ng-click="createLeader()">Lagre</button>
+		<button type="submit" class="btn btn-primary" ng-if="showUpdateButton" ng-if="doEdit" ng-click="updateLeader(leaderEditedID)">Oppdater</button>
+		<button type="reset" class="btn btn-default" ng-show="showCancelButton" ng-click="cancel()">Avbryt</button>
+    </div>
+  </div>
+</div>

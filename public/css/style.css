@@ -61,3 +61,11 @@ code {
   vertical-align: bottom;
   padding-bottom: 10px;
 }
+
+.modal {
+  display: block; 
+}
+
+a {
+  cursor: pointer;
+}
