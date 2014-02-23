@@ -58,12 +58,27 @@
 
       <!-- Begin page content -->
       <div class="container">
-          <div class="page-header">
+          <!--<div class="page-header">-->
             <table style="width: 100%;">
               <tr>
-                <td tyle="vertical-align: bottom;">
-                  <h1>{{pageHeader}}</h1>
+                <td>
+                  <!-- Single button -->
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                      Action <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>
                 </td>
+                <!--<td tyle="vertical-align: bottom;">
+                  <h1>{{pageHeader}}</h1>
+                </td>-->
                 <td class="messagearea">
                   <span class="message-container" ng-controller="MessageController" ng-class="messageStyle" style="text-align: right;">
                     {{ message }}
@@ -72,7 +87,7 @@
                 </td>
               </tr> 
             </table>    
-          </div>  
+          <!--</div>  -->
           <p class="lead">
         	   <div data-ng-view=""></div>
           </p>

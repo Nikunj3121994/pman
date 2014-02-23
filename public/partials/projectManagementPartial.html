@@ -1,0 +1,87 @@
+<div class="container">
+	<div id="calculation-list" class="row">
+		<div class="col-xs-6">
+			<div class="panel panel-default">
+			  	<div class="panel-heading">Kalkyler for prosjekt xxxxxxx</div>
+			  	<div class="panel-body">
+			  		<div class="input-group">
+			            <input type="text" class="form-control" placeholder="Søk i kalkyler" name="srch-term" id="srch-term" ng-model="searchCalculation">
+			            <div class="input-group-btn">
+			                <button class="btn btn-default" ng-click="resetSearch()" ng-model="searchCalculation"><i class="glyphicon glyphicon-remove-circle"></i></button>
+			            </div>
+			        </div><br/>
+			    	<table class="table table-hover">
+			    		<tr>
+			    			<th>Navn</th>
+			    			<th></th>
+			    		</tr>
+						<tr ng-repeat="calculation in (filteredCalculations = (calculations | filter:searchCalculation)) | startFrom:currentPage*pageSize | limitTo:pageSize">
+							<td>{{calculation.title}}</td>
+							<td>
+								<button type="button" alt="Slett kalkyle" style="border: 1px; background-color: transparent">
+									<span class="glyphicon glyphicon-remove" ng-click="deleteCalculation(calculation._id)"></span>
+								</button>
+								<button type="button" alt="Rediger kalkyle" style="border: 1px; background-color: transparent">
+									<span class="glyphicon glyphicon-pencil" ng-click="editCalculation($index)"></span>
+								</button>
+							</td>
+
+						</tr>
+					</table>
+
+					<ul class="pagination">
+					  <li><a href="" ng-click="changePage(false)">&laquo;</a></li>
+					  <li><span>{{currentPage+1}}/{{numberOfPages()}}</span></li>
+					  <li><a href="" ng-click="changePage(true)">&raquo;</a></li>
+					</ul>
+
+			  	</div>
+			</div>
+		</div>
+
+		<div class="col-xs-6">
+			<div class="panel panel-default">
+			  	<div class="panel-heading">Kalkyleskjema</div>
+			  	<div class="panel-body">
+					<form name="calculationForm" novalidate="">
+						<div class="form-group">
+							<div id="calculation-form-grid" class="row">
+								<div class="col-xs-12 col-sm-6 col-md-8">
+									<input type="text" class="form-control" name="calculationTitle" 
+										ng-model="formData.name" required="" placeholder="Navn på kalkyle" />
+								</div>
+								<div class="col-xs-6 col-md-4" ng-show="calculationForm.$dirty && calculationForm.$invalid">
+									<span class="error" ng-show="calculationForm.calculationTitle.$error.required">
+									<span class="glyphicon glyphicon-minus" />
+									</span>
+								</div>
+							</div>
+						</div><br/>
+						<div class="form-group">
+							<div id="calculation-form-grid" class="row">
+								<div class="col-xs-12 col-sm-6 col-md-8">
+									<select class="form-control text-center" 
+											name="calculationType" 
+											ng-model="formData._type" 
+											required="" >
+									  <option value="Endring">Endring</option>
+									  <option value="Kontrakt">Kontrakt</option>
+									</select>
+								</div>
+								<div class="col-xs-6 col-md-4" ng-show="calculationForm.$dirty && calculationForm.$invalid">
+									<span class="error" ng-show="calculationForm.calculationType.$error.required">
+									<span class="glyphicon glyphicon-minus" />
+									</span>
+								</div>
+							</div>
+						</div>
+						<br/>
+						<button type="submit" class="btn btn-primary" ng-show="showSaveButton" ng-click="createCalculation()">Lagre</button>
+						<button type="submit" class="btn btn-primary" ng-show="showUpdateButton" ng-click="updateCalculation(calculationEditedID)">Oppdater</button>
+						<button type="reset" class="btn btn-default" ng-show="showCancelButton" ng-click="resetCalculationForm()">Avbryt</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

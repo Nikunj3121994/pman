@@ -7,7 +7,7 @@
 			  			<tr>
 			  				<td>Prosjektliste</td>
 			  				<td style="text-align: right;">
-			  					<button type="button" alt="Ny kunde" style="border: 1px; background-color: transparent">
+			  					<button type="button" title="Nytt prosjekt" style="border: 1px; background-color: transparent">
 									<span class="glyphicon glyphicon-plus" ng-click="openProjectModal()"></span>
 								</button>
 			  				</td>
@@ -18,7 +18,7 @@
 			  		<div class="input-group">
 			            <input type="text" class="form-control" placeholder="Søk i prosjekter" name="srch-term" id="srch-term" ng-model="searchProject">
 			            <div class="input-group-btn">
-			                <button class="btn btn-default" ng-click="resetSearch()" ng-model="searchProject"><i class="glyphicon glyphicon-remove-circle"></i></button>
+			                <button title="Tilbakestill søk" class="btn btn-default" ng-click="resetSearch()" ng-model="searchProject"><i class="glyphicon glyphicon-remove-circle"></i></button>
 			            </div>
 			        </div><br/>
 			    	<table class="table table-hover">
@@ -31,12 +31,13 @@
 							<td>{{project.idproject}}</td>
 							<td>{{project.title}}</td>
 							<td>
-								<button type="button" alt="Slett prosjekt" style="border: 1px; background-color: transparent">
+								<button type="button" title="Slett prosjekt" style="border: 1px; background-color: transparent">
 									<span class="glyphicon glyphicon-remove" ng-click="deleteProject(project._id)"></span>
 								</button>
-								<button type="button" alt="Rediger prosjekt" style="border: 1px; background-color: transparent">
+								<button type="button" title="Rediger prosjekt" style="border: 1px; background-color: transparent">
 									<span class="glyphicon glyphicon-pencil" ng-click="editProject($index)"></span>
 								</button>
+								<a href="#/project" title="Åpne prosjektkontroll for {{project.idproject}}"><span class="glyphicon glyphicon-new-window"></span></a>
 							</td>
 
 						</tr>

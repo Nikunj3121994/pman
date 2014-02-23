@@ -57,6 +57,10 @@ function projectController($scope, projectFactory, MessageFactory, $log, $rootSc
 	$scope.numberOfPages=function(){
         return Math.ceil($scope.filteredProjects.length/$scope.pageSize);                
     }
+
+    $scope.go = function ( path ) {
+	  	$location.path( path );
+	};
 	
 	
 	// Create new project using projectFactory

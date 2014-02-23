@@ -1,0 +1,65 @@
+<div class="container">
+	<div id="project-list" class="row">
+		<div> <!-- class="col-xs-6" -->
+			<accordion close-others="true">
+			    <accordion-group heading="Static Header, initially expanded" is-open="true">
+			      This content is straight in the template.
+			    </accordion-group>
+			    <accordion-group is-open="isopen">
+			        <accordion-heading>
+			            I can have markup, too! <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
+			        </accordion-heading>
+			        This is just some content to illustrate fancy headings.
+			    </accordion-group>
+			</accordion>
+			<!--<div class="panel panel-default">
+			  	<div class="panel-heading">
+			  		<table style="width: 100%">
+			  			<tr>
+			  				<td>Prosjektliste</td>
+			  				<td style="text-align: right;">
+			  					<button type="button" title="Nytt prosjekt" style="border: 1px; background-color: transparent">
+									<span class="glyphicon glyphicon-plus" ng-click="openProjectModal()"></span>
+								</button>
+			  				</td>
+			  			</tr>
+			  		</table>
+			  	</div>
+			  	<div class="panel-body">
+			  		<div class="input-group">
+			            <input type="text" class="form-control" placeholder="Søk i prosjekter" name="srch-term" id="srch-term" ng-model="searchProject">
+			            <div class="input-group-btn">
+			                <button title="Tilbakestill søk" class="btn btn-default" ng-click="resetSearch()" ng-model="searchProject"><i class="glyphicon glyphicon-remove-circle"></i></button>
+			            </div>
+			        </div><br/>
+			    	<table class="table table-hover">
+			    		<tr>
+			    			<th>Prosjektnummer</th>
+			    			<th>Tittel</th>
+			    			<th></th>
+			    		</tr>
+						<tr ng-repeat="project in (filteredProjects = (projects | filter: searchProject)) | startFrom:currentPage*pageSize | limitTo:pageSize">
+							<td>{{project.idproject}}</td>
+							<td>{{project.title}}</td>
+							<td>
+								<button type="button" title="Slett prosjekt" style="border: 1px; background-color: transparent">
+									<span class="glyphicon glyphicon-remove" ng-click="deleteProject(project._id)"></span>
+								</button>
+								<button type="button" title="Rediger prosjekt" style="border: 1px; background-color: transparent">
+									<span class="glyphicon glyphicon-pencil" ng-click="editProject($index)"></span>
+								</button>
+								<a href="#/project" title="Åpne prosjektkontroll for {{project.idproject}}"><span class="glyphicon glyphicon-new-window"></span></a>
+							</td>
+
+						</tr>
+					</table>
+					<ul class="pagination">
+					  <li><a href="" ng-click="changePage(false)">&laquo;</a></li>
+					  <li><span>{{currentPage+1}}/{{numberOfPages()}}</span></li>
+					  <li><a href="" ng-click="changePage(true)">&raquo;</a></li>
+					</ul>
+			  	</div>
+			</div>-->
+		</div>
+	</div>
+</div>

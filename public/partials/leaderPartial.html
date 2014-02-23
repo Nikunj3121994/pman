@@ -7,7 +7,7 @@
 			  			<tr>
 			  				<td>Prosjektlederliste</td>
 			  				<td style="text-align: right;">
-			  					<button type="button" alt="Ny kunde" style="border: 1px; background-color: transparent">
+			  					<button type="button" title="Ny prosjektleder" style="border: 1px; background-color: transparent">
 									<span class="glyphicon glyphicon-plus" ng-click="openLeaderModal()"></span>
 								</button>
 			  				</td>
@@ -18,7 +18,7 @@
 			  		<div class="input-group">
 			            <input type="text" class="form-control" placeholder="Søk i prosjektleder" name="srch-term" id="srch-term" ng-model="searchLeader">
 			            <div class="input-group-btn">
-			                <button class="btn btn-default" ng-click="resetSearch()" ng-model="searchLeader"><i class="glyphicon glyphicon-remove-circle"></i></button>
+			                <button title="Tilbakestill søk" class="btn btn-default" ng-click="resetSearch()" ng-model="searchLeader"><i class="glyphicon glyphicon-remove-circle"></i></button>
 			            </div>
 			        </div><br/>
 			    	<table class="table table-hover">
@@ -29,10 +29,10 @@
 						<tr ng-repeat="leader in (filteredLeaders = (leaders | filter:searchLeader)) | startFrom:currentPage*pageSize | limitTo:pageSize">
 							<td>{{leader.name}}</td>
 							<td>
-								<button type="button" alt="Slett prosjektleder" style="border: 1px; background-color: transparent">
+								<button type="button" title="Slett prosjektleder" style="border: 1px; background-color: transparent">
 									<span class="glyphicon glyphicon-remove" ng-click="deleteLeader(leader._id)"></span>
 								</button>
-								<button type="button" alt="Rediger prosjektleder" style="border: 1px; background-color: transparent">
+								<button type="button" title="Rediger prosjektleder" style="border: 1px; background-color: transparent">
 									<span class="glyphicon glyphicon-pencil" ng-click="editLeader($index)"></span>
 								</button>
 							</td>
