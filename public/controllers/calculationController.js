@@ -1,4 +1,4 @@
-function projectManagementController($scope, calculationFactory, MessageFactory, $log, $rootScope) {
+function calculationController($scope, calculationFactory, MessageFactory, $log, $rootScope, $modal) {
 	$scope.formData = {};
 	$scope.calculations = [];
 	

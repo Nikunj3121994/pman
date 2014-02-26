@@ -31,13 +31,26 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="./">Prosjektstyring</a>
+            <a class="navbar-brand" href="./"><span class="glyphicon glyphicon-tasks"></span> PROSJEKTSTYRING</a>
           </div>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-              <li class="active" ng-class="{ active: isActive('/')}"><a href="./">Kunder</a></li>
-              <li ng-class="{ active: isActive('/projects')}"><a href="./#projects">Prosjekt</a></li>
-              <li ng-class="{ active: isActive('/leaders')}"><a href="./#leaders">Prosjektledere</a></li>
+              <li class="dropdown">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown">Vis <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li class="active" ng-class="{ active: isActive('/')}"><a href="./">Kunder</a></li>
+                  <li ng-class="{ active: isActive('/projects')}"><a href="./#projects">Prosjekt</a></li>
+                  <li ng-class="{ active: isActive('/leaders')}"><a href="./#leaders">Prosjektledere</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown">Prosjekthåndtering <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li class="active" ng-class="{ active: isActive('/')}"><a href="./">Kalkyler</a></li>
+                </ul>
+              </li>
+            </ul>
+
               <!--<li><a href="http://getbootstrap.com/examples/sticky-footer-navbar/#contact">Contact</a></li>
               <li class="dropdown">
                 <a href="./Sticky Footer Navbar Template for Bootstrap_files/Sticky Footer Navbar Template for Bootstrap.htm" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
@@ -51,7 +64,6 @@
                   <li><a href="./Sticky Footer Navbar Template for Bootstrap_files/Sticky Footer Navbar Template for Bootstrap.htm">One more separated link</a></li>
                 </ul>
               </li>-->
-            </ul>
           </div>
         </div>
       </div>
@@ -61,21 +73,6 @@
           <!--<div class="page-header">-->
             <table style="width: 100%;">
               <tr>
-                <td>
-                  <!-- Single button -->
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                      Action <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Action</a></li>
-                      <li><a href="#">Another action</a></li>
-                      <li><a href="#">Something else here</a></li>
-                      <li class="divider"></li>
-                      <li><a href="#">Separated link</a></li>
-                    </ul>
-                  </div>
-                </td>
                 <!--<td tyle="vertical-align: bottom;">
                   <h1>{{pageHeader}}</h1>
                 </td>-->

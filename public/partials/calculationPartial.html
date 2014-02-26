@@ -2,7 +2,31 @@
 	<div id="calculation-list" class="row">
 		<div class="col-xs-6">
 			<div class="panel panel-default">
-			  	<div class="panel-heading">Kalkyler for prosjekt xxxxxxx</div>
+			  	<div class="panel-heading">
+			  		<table style="width: 100%">
+			  			<tr>
+			  				<td>Kundeliste</td>
+			  				<td style="text-align: right;">
+			  					<!-- Single button -->
+				                  <div class="btn-group">
+				                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				                      Action <span class="caret"></span>
+				                    </button>
+				                    <ul class="dropdown-menu" role="menu">
+				                      <li><a href="#">Action</a></li>
+				                      <li><a href="#">Another action</a></li>
+				                      <li><a href="#">Something else here</a></li>
+				                      <li class="divider"></li>
+				                      <li><a href="#">Separated link</a></li>
+				                    </ul>
+				                  </div>
+			  					<button type="button" title="Ny kunde" style="border: 1px; background-color: transparent">
+									<span class="glyphicon glyphicon-plus" ng-click="openCustomerModal()"></span>
+								</button>
+			  				</td>
+			  			</tr>
+			  		</table>
+			  	</div>
 			  	<div class="panel-body">
 			  		<div class="input-group">
 			            <input type="text" class="form-control" placeholder="Søk i kalkyler" name="srch-term" id="srch-term" ng-model="searchCalculation">
