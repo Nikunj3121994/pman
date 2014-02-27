@@ -20,7 +20,7 @@ pmanApp.config(function($routeProvider) {
 				controller: 'leaderController',
 				templateUrl: 'partials/leaderPartial.html'
 			})
-		.when('/calculations',
+		.when('/projectCalculations',
 			{
 				controller: 'calculationController',
 				templateUrl: 'partials/calculationPartial.html'

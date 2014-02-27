@@ -5,21 +5,8 @@
 			  	<div class="panel-heading">
 			  		<table style="width: 100%">
 			  			<tr>
-			  				<td>Kundeliste</td>
-			  				<td style="text-align: right;">
-			  					<!-- Single button -->
-				                  <div class="btn-group">
-				                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-				                      Action <span class="caret"></span>
-				                    </button>
-				                    <ul class="dropdown-menu" role="menu">
-				                      <li><a href="#">Action</a></li>
-				                      <li><a href="#">Another action</a></li>
-				                      <li><a href="#">Something else here</a></li>
-				                      <li class="divider"></li>
-				                      <li><a href="#">Separated link</a></li>
-				                    </ul>
-				                  </div>
+			  				<td>Kalkyleoversikt</td>
+			  				<td style="text-align: right;">			  					
 			  					<button type="button" title="Ny kunde" style="border: 1px; background-color: transparent">
 									<span class="glyphicon glyphicon-plus" ng-click="openCustomerModal()"></span>
 								</button>
@@ -36,11 +23,13 @@
 			        </div><br/>
 			    	<table class="table table-hover">
 			    		<tr>
-			    			<th>Navn</th>
+			    			<th>Tittel</th>
+			    			<th>Type</th>
 			    			<th></th>
 			    		</tr>
 						<tr ng-repeat="calculation in (filteredCalculations = (calculations | filter:searchCalculation)) | startFrom:currentPage*pageSize | limitTo:pageSize">
 							<td>{{calculation.title}}</td>
+							<td>{{calculation.type}}</td>
 							<td>
 								<button type="button" alt="Slett kalkyle" style="border: 1px; background-color: transparent">
 									<span class="glyphicon glyphicon-remove" ng-click="deleteCalculation(calculation._id)"></span>
