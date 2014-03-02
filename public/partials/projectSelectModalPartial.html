@@ -1,0 +1,45 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" ng-click="cancel()">&times;</button>
+      <h4 class="modal-title">Velg prosjekt</h4>
+    </div>
+    <div class="modal-body">
+    	<div id="project-list" class="row">
+			<div>
+		  		<div class="input-group">
+		            <input type="text" class="form-control" placeholder="Søk i prosjekter" name="srch-term" id="srch-term" ng-model="searchProject">
+		            <div class="input-group-btn">
+		                <button title="Tilbakestill søk" class="btn btn-default" ng-click="resetSearch()" ng-model="searchProject"><i class="glyphicon glyphicon-remove-circle"></i></button>
+		            </div>
+		        </div><br/>
+		    	<table class="table table-hover">
+		    		<tr>
+		    			<th>Prosjektnummer</th>
+		    			<th>Tittel</th>
+		    			<th></th>
+		    		</tr>
+					<tr ng-repeat="project in (filteredProjects = (projects | filter: searchProject)) | startFrom:currentPage*pageSize | limitTo:pageSize">
+						<td>{{project.idproject}}</td>
+						<td>{{project.title}}</td>
+						<td>
+							<button type="button" title="Velg prosjekt og returner" style="border: 1px; background-color: transparent">
+								<span class="glyphicon glyphicon-arrow-right" ng-click="selectProject({id: project.idproject, title: project.title, _id: project._id})"></span>
+							</button>
+						</td>
+
+					</tr>
+				</table>
+				<ul class="pagination">
+				  <li><a href="" ng-click="changePage(false)">&laquo;</a></li>
+				  <li><span>{{currentPage+1}}/{{numberOfPages()}}</span></li>
+				  <li><a href="" ng-click="changePage(true)">&raquo;</a></li>
+				</ul>
+			</div>
+		</div>
+    </div>
+    <div class="modal-footer">
+		<button type="reset" class="btn btn-default" ng-show="showCancelButton" ng-click="cancel()">Avbryt</button>
+    </div>
+  </div>
+</div>

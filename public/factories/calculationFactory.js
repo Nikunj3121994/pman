@@ -17,6 +17,21 @@ function calculationFactory($http, $log) {
 		 
 	     	return promise;
 	    }, 
+
+	    getCalculationsForProject:function(id) {
+	    	var promise = $http({
+	        	method: 'GET',
+	            url: '/api/calculationsForProject/' + id,
+	            timeout: 10000
+	        }).then(function(response) {
+	        	$log.info('Retrieved data: ',response);
+	           	return response;  
+	        },  function(reason) {
+	        	$log.error("Request Failed: ", reason);
+	     	});
+		 
+	     	return promise;
+	    }, 
 	    
 	    updateCalculation:function(formData, id) {
 	    	var promise = $http({

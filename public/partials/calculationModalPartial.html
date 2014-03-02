@@ -9,14 +9,33 @@
 			<div class="form-group">
 				<div id="calculation-form-grid" class="row">
 					<div class="col-xs-12 col-sm-6 col-md-8">
-						<input type="text" class="form-control" name="calculationName" 
-							ng-model="formData.name" required="" placeholder="Navn på kunde" />
+						<input type="text" class="form-control" name="calculationTitle" 
+							ng-model="formData.title" required="" placeholder="Navn på kalkyle" />
 					</div>
 					<div class="col-xs-6 col-md-4" ng-show="calculationForm.$dirty && calculationForm.$invalid">
-						<span class="error" ng-show="calculationForm.calculationName.$error.required">
+						<span class="error" ng-show="calculationForm.calculationTitle.$error.required">
 						<span class="glyphicon glyphicon-minus" />
 						</span>
 					</div>
+			</div><br/>	
+			<div class="form-group">
+				<div id="calculation-form-grid" class="row">
+					<div class="col-xs-12 col-sm-6 col-md-8">
+						<select class="form-control text-center" 
+								name="calculationType" 
+								ng-model="formData.type" 
+								required="" >
+							<option value="" style="display: none;">-- Type ---</option>
+						  	<option value="Endring" Selected="selected">Endring</option>
+						  	<option value="Kontrakt">Kontrakt</option>
+						</select>
+					</div>
+					<div class="col-xs-6 col-md-4" ng-show="calculationForm.$dirty && calculationForm.$invalid">
+						<span class="error" ng-show="calculationForm.calculationType.$error.required">
+						<span class="glyphicon glyphicon-minus" />
+						</span>
+					</div>
+				</div>
 			</div>
 		</form><br/>
 		<span class="message-container" ng-controller="MessageController" ng-class="messageStyle" style="text-align: right;">
@@ -24,8 +43,8 @@
         <div style="display: none;"><timer interval="1000" countdown="5"/></div> 
     </div>
     <div class="modal-footer">
-		<button type="submit" class="btn btn-primary" ng-if="showSaveButton" ng-click="createCustomer()">Lagre</button>
-		<button type="submit" class="btn btn-primary" ng-if="showUpdateButton" ng-if="doEdit" ng-click="updateCustomer(calculationEditedID)">Oppdater</button>
+		<button type="submit" class="btn btn-primary" ng-if="showSaveButton" ng-click="createCalculation()">Lagre</button>
+		<button type="submit" class="btn btn-primary" ng-if="showUpdateButton" ng-click="updateCalculation(calculationEditedID)">Oppdater</button>
 		<button type="reset" class="btn btn-default" ng-show="showCancelButton" ng-click="cancel()">Avbryt</button>
     </div>
   </div>

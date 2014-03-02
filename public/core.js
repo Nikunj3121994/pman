@@ -30,13 +30,16 @@ pmanApp.controller('MessageController', MessageController);
 
 //Inject needed "modules" to controllers
 MessageController.$inject = ['$scope', 'MessageFactory', '$log'];
+headerController.$inject = ['$scope', '$location', '$modal', '$log', '$rootScope'];
 customerController.$inject = ['$scope', 'customerFactory', 'MessageFactory', '$log', '$rootScope', '$modal'];
 customerModalController.$inject = ['$scope', '$modalInstance','customerFactory', 'MessageFactory', '$log', '$rootScope'];
 leaderController.$inject = ['$scope', 'leaderFactory', 'MessageFactory', '$log', '$rootScope', '$modal'];
 leaderModalController.$inject = ['$scope', '$modalInstance','leaderFactory', 'MessageFactory', '$log', '$rootScope'];
-calcuclationController.$inject = ['$scope', 'calculationFactory', 'MessageFactory', '$log', '$rootScope', '$modal'];
+calculationController.$inject = ['$scope', 'calculationFactory', 'MessageFactory', '$log', '$rootScope', '$modal'];
+calculationModalController.$inject = ['$scope', '$modalInstance', 'calculationFactory', 'MessageFactory', '$log', '$rootScope'];
 projectController.$inject = ['$scope', 'projectFactory', 'MessageFactory', '$log', '$rootScope', 'customerFactory', 'leaderFactory', '$modal'];
 projectModalController.$inject = ['$scope', '$modalInstance','projectFactory', 'MessageFactory', '$log', '$rootScope', 'customerFactory', 'leaderFactory'];
+projectSelectModalController.$inject = ['$scope', '$modalInstance','projectFactory', '$log', '$rootScope'];
 
 
 

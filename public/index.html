@@ -43,10 +43,28 @@
                   <li ng-class="{ active: isActive('/leaders')}"><a href="./#leaders">Prosjektledere</a></li>
                 </ul>
               </li>
-              <li class="dropdown">
+              <li class="dropdown" ng-show="projectSelected">
                 <a href="" class="dropdown-toggle" data-toggle="dropdown">Prosjekthåndtering <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li class="active" ng-class="{ active: isActive('/')}"><a href="./#projectCalculations">Kalkyler</a></li>
+                  <li class="divider"></li>
+                  <li class="active" ng-class="{ active: isActive('/')}">
+                    <!--<a href="./#selectProject">Velg aktivt prosjekt</a>-->
+                    <button type="button" title="Velg annet prosjekt for redigering" style="border: 1px; background-color: transparent" ng-click="openProjectSelectModal()">
+                      <span class="glyphicon glyphicon-new-window"></span> Velg annet prosjekt
+                    </button>
+                  </li>
+                </ul>
+              </li>
+              <li class="dropdown" ng-hide="projectSelected">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown">Prosjekthåndtering <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li class="active" ng-class="{ active: isActive('/')}">
+                    <!--<a href="./#selectProject">Velg aktivt prosjekt</a>-->
+                    <button type="button" title="Velg aktivt prosjekt" style="border: 1px; background-color: transparent" ng-click="openProjectSelectModal()">
+                      <span class="glyphicon glyphicon-new-window"></span> Velg aktivt prosjekt
+                    </button>
+                  </li>
                 </ul>
               </li>
             </ul>
@@ -127,8 +145,10 @@
     <script src="controllers/leaderController.js"></script>
     <script src="controllers/leaderModalController.js"></script>
     <script src="controllers/calculationController.js"></script>
+    <script src="controllers/calculationModalController.js"></script>
     <script src="controllers/projectController.js"></script>
     <script src="controllers/projectModalController.js"></script>
+    <script src="controllers/projectSelectModalController.js"></script>
     <script src="controllers/messageController.js"></script>
     <script src="controllers/headerController.js"></script>
     

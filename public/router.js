@@ -30,5 +30,10 @@ pmanApp.config(function($routeProvider) {
 				controller: 'customerController',
 				templateUrl: 'partials/test.html'
 			})
+		.when('/calculationParts',
+			{
+				controller: 'calculationController',
+				templateUrl: 'partials/calculationPartPartial.html'
+			})
 		.otherwise({redirectTo: '/'});
 });

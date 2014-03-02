@@ -6,20 +6,21 @@ module.exports = function(app, pool, ConnectionErrorCheck, QueryHasErrors, Retur
 	//============================================================List all calculations
 	app.get('/api/calculations', function (req, res){
 		if(pool) { //MySql used as database
-			pool.getConnection(function(err, connection) {
-			
-				if(!ConnectionErrorCheck(err, res)) {
-			  		connection.query( 'SELECT * FROM calculation', function(err, rows) {
-			  			if(!QueryHasErrors(err, res)) {
-			  				ReturnResults(res, rows, 200);
-			  			}
-
-			    		connection.release();
-			  		});	
-				} 
-			});
+			//Not implemented
 		} else { //MongoDB used as database
 			Calculation.find({}).exec(function(err, result) {
+				if(!QueryHasErrors(err, res)) {
+			  		ReturnResults(res, result, 201);
+			  	}
+			});
+		}
+	});
+
+	app.get('/api/calculationsForProject/:id', function (req, res){
+		if(pool) { //MySql used as database
+			//Not implemented
+		} else { //MongoDB used as database
+			Calculation.find({_project: req.params.id}).exec(function(err, result) {
 				if(!QueryHasErrors(err, res)) {
 			  		ReturnResults(res, result, 201);
 			  	}
@@ -30,18 +31,7 @@ module.exports = function(app, pool, ConnectionErrorCheck, QueryHasErrors, Retur
 	//============================================================Get Spesific calculation
 	app.get('/api/calculations/:id', function (req, res){
 		if(pool) { //MySql used as database	
-		  	pool.getConnection(function(err, connection) {
-			
-				if(!ConnectionErrorCheck(err, res)) {
-			  		connection.query( 'SELECT * FROM calculation where _id = ?', req.params.id, function(err, rows) {
-			  			if(!QueryHasErrors(err, res)) {
-			  				ReturnResults(res, rows, 200);
-			  			}
-
-			    		connection.release();
-			  		});	
-				} 
-			});
+		  	//Not implemented
 		} else { //MongoDB used as database
 			var query = { _id: req.params.id }
 			Calculation.findOne(query, function(err, result) {
@@ -55,19 +45,7 @@ module.exports = function(app, pool, ConnectionErrorCheck, QueryHasErrors, Retur
 	//============================================================Delete calculation
 	app.delete('/api/calculations/:id', function (req, res){
 		if(pool) { //MySql used as database	
-			pool.getConnection(function(err, connection) {
-			
-				if(!ConnectionErrorCheck(err, res)) {
-			  		connection.query( 'DELETE FROM calculation where _id = ?', req.params.id, function(err, rows) {
-			  			if(!QueryHasErrors(err, res)) {
-			  				console.log('Deleted Calculation with ID = ' + req.params.id);
-			  				ReturnResults(res, null, 204);
-			  			}
-			    		
-			    		connection.release();
-			  		});	
-				} 
-			});
+			//Not implemented
 		} else { //MongoDB used as database
 			var query = {_id:req.params.id};
 			Calculation.findOneAndRemove(query, function(err, doc) {
@@ -79,33 +57,18 @@ module.exports = function(app, pool, ConnectionErrorCheck, QueryHasErrors, Retur
 	    }
 	});
 
-	//============================================================Add cunstomer
+	//============================================================Add calculation
 	app.post('/api/calculations', function (req, res){
 		if(pool) { //MySql used as database	
-			pool.getConnection(function(err, connection) {
-			
-				if(!ConnectionErrorCheck(err, res)) {
-					var post = {name: req.body.name};
-					
-			  		connection.query( 'INSERT INTO calculation SET ?', post, function(err, rows) {
-			  			if(!QueryHasErrors(err, res)) {
-			  				post._id = rows.insertId;
-			  				console.log('Inserted Calculation: ' + JSON.stringify(post));
-			  				ReturnResults(res, post, 201);
-			  			}
-
-			    		connection.release();
-			  		});	
-				} 
-			});
+			//Not implemented
 		} else { //MongoDB used as database
-			var newCust = new Calculation ({name: req.body.name});
+			var newCalc = new Calculation ({title: req.body.title, type: req.body.type, active: req.body.active, _project: req.body._project });
 
-			newCust.save(function (err) {
+			newCalc.save(function (err) {
 				if(!QueryHasErrors(err, res)) {
 			  		//post._id = rows.insertId;
-			  		console.log('Inserted Calculation: ' + JSON.stringify(newCust));
-			  		ReturnResults(res, newCust, 201);
+			  		console.log('Inserted Calculation: ' + JSON.stringify(newCalc));
+			  		ReturnResults(res, newCalc, 201);
 			  	}
 			});
 		}
@@ -114,27 +77,10 @@ module.exports = function(app, pool, ConnectionErrorCheck, QueryHasErrors, Retur
 	//============================================================Update calculation
 	app.put('/api/calculations/:id', function (req, res){
 		if(pool) { //MySql used as database	
-			pool.getConnection(function(err, connection) {
-			
-				if(!ConnectionErrorCheck(err, res)) {
-					var post = {name: req.body.name};
-					
-					console.log(post);
-					
-			  		connection.query( 'UPDATE calculation SET ? WHERE _id = ?', [post, req.params.id], function(err, rows) {
-			    		if(!QueryHasErrors(err, res)) {
-			    			post._id = req.params.id;
-			    			console.log('Updated Calculation: ' + JSON.stringify(post));
-			  				ReturnResults(res, post, 200);
-			  			}
-
-			    		connection.release();
-			  		});	
-				} 
-			});
+			//Not implemented
 		} else { //MongoDB used as database
 			var query = { _id: req.params.id };
-			var update = { name: req.body.name };
+			var update = { title: req.body.title, type: req.body.type, active: req.body.active, _project: req.body._project };
 			Calculation.findOneAndUpdate(query, update, null, function(err, result) {
 				if(!QueryHasErrors(err, res)) {
 					console.log('Updated Calculation: ' + JSON.stringify(result));

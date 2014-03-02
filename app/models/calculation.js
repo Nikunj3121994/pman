@@ -3,7 +3,10 @@ var mongoose = require('mongoose');
 // define the schema for our main project calculation
 var calculationSchema = mongoose.Schema({
     _project	: { type: mongoose.Schema.ObjectId, ref: 'Project' },
-    parts 		: [calculationPartSchema],
+    _parts 		: [calculationPartSchema],
+    title       : String,
+    type        : String,
+    active      : Boolean
 });
 
 // define the schema for our calculation part
@@ -11,7 +14,7 @@ var calculationPartSchema = mongoose.Schema({
     title       : String,
     type		: String,
     active		: Boolean,
-    lines		: [calculationPartLineSchema]
+    _lines		: [calculationPartLineSchema]
 });
 
 // define the schema for one line in a calculation part

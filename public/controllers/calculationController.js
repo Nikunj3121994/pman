@@ -6,22 +6,40 @@ function calculationController($scope, calculationFactory, MessageFactory, $log,
 	init();
 	
 	function init() {
-		calculationFactory.getCalculations().then(function(data) {
+		setUpProjectWatch();
+
+		if(!$rootScope.selectedProjectID) {
+			MessageFactory.prepareForBroadcast('Aktivt prosjekt må velges fra menyen prosjekthåndtering', 'label label-warning');
+			//setUpProjectWatch();
+			return;
+		}
+
+		//getCalculations($scope.selectedProject_id);
+		//preparePage();	
+		//setUpProjectWatch();
+    	
+	}
+
+	function setUpProjectWatch(idproject) {
+		$rootScope.$watch('selectedProjectID', function () {
+	    	$scope.selectedProjectID = $rootScope.selectedProjectID;
+	    	$scope.selectedProjectTitle = $rootScope.selectedProjectTitle;
+	    	$scope.selectedProject_id = $rootScope.selectedProject_id;
+	    	if($scope.selectedProjectID) {
+	    		getCalculations($scope.selectedProject_id);	
+	    	}
+	    	preparePage();	
+	    });
+	}
+
+	function getCalculations(idproject) {
+		calculationFactory.getCalculationsForProject(idproject).then(function(data) {
 			if(!$rootScope.RHE(data, true)) {
 				$scope.calculations = data.data;
 			} else {
 				MessageFactory.prepareForBroadcast('Det oppstod en feil ved lasting av kalkyler', 'label label-danger');
 			}
 		});
-
-		$scope.showSaveButton = true;
-		$scope.showUpdateButton = false;	
-		$scope.showCancelButton = true;	
-
-		$rootScope.pageHeader = 'Prosjektbehandling';
-
-		$scope.currentPage = 0;
-    	$scope.pageSize = 10;	
 	}
 
 	$scope.changePage=function(add){
@@ -34,60 +52,47 @@ function calculationController($scope, calculationFactory, MessageFactory, $log,
         	}
         }       
     }
+
+    function preparePage(){
+    	$rootScope.pageHeader = 'Prosjektbehandling';
+
+       	$scope.showSaveButton = true;
+		$scope.showUpdateButton = false;	
+		$scope.showCancelButton = true;	 
+
+		$scope.currentPage = 0;
+    	$scope.pageSize = 10;
+    }
 	
 	$scope.numberOfPages=function(){
         return Math.ceil($scope.filteredCalculations.length/$scope.pageSize);                
     }
 
-	// Create new calculation using calculationFactory
-	$scope.createCalculation = function() {
-		if( $scope.calculationForm.$valid) {
-			calculationFactory.addCalculation($scope.formData).then(function(data) {
-				if(!$rootScope.RHE(data, true)) {
-					$scope.calculations.push(data. data);
-					$scope.formData = {};
+	$scope.openCalculationModal = function () {
+	    var modalInstance = $modal.open({
+	      	templateUrl: 'partials/calculationModalPartial.html',
+	      	controller: 'calculationModalController',
+	      	scope: $scope
+	    });	
 
-					MessageFactory.prepareForBroadcast('Ny kalkyle opprettet', 'label label-success');
-				} else {
-					MessageFactory.prepareForBroadcast('Det oppstod en feil under oppretting av ny kalkyle', 'label label-danger');
-				}
-			});	
-		} else {
-			MessageFactory.prepareForBroadcast('Kontroller felter med rød -', 'label label-warning');	
-		}
-	};
-
-	// Create new calculation using calculationFactory
-	$scope.updateCalculation = function(id) {
-		if( $scope.calculationForm.$valid) {
-			calculationFactory.updateCalculation($scope.formData, id).then(function(data) {
-				if(!$rootScope.RHE(data, true)) {
-					for (var i = 0; i < $scope.calculations.length; i++) {
-						if ($scope.calculations[i]._id === id) {
-							$scope.calculations[i] = data.data;
-							break;
-						}
-					}
-					$scope.showSaveButton = true;
-					$scope.showUpdateButton = false;	
-					$scope.formData = {};
-
-					MessageFactory.prepareForBroadcast('Kalkyle oppdatert', 'label label-success');
-				} else {
-					MessageFactory.prepareForBroadcast('Det oppstod en feil under oppdatering av kalkyle', 'label label-danger');
-				}
-			});	
-		} else {
-			MessageFactory.prepareForBroadcast('Kontroller felter med rød -', 'label label-warning');	
-		}
-	};
+	    modalInstance.result.then(function (result) {
+	    	MessageFactory.prepareForBroadcast('Kalkyle ' + result, 'label label-success');
+	    });
+  	};
 
 	// Put calculation to edit in edit form
 	$scope.editCalculation = function(index) {
 		$scope.showSaveButton = false;
 		$scope.showUpdateButton = true;
+
 		$scope.calculationEditedID = $scope.filteredCalculations[index]._id;
-		$scope.formData = $scope.filteredCalculations[index];
+
+		$scope.formData = {__v: $scope.filteredCalculations[index].__v,
+						   _id: $scope.filteredCalculations[index]._id, 
+						   title: $scope.filteredCalculations[index].title,
+						   type: $scope.filteredCalculations[index].type,
+						   active: $scope.filteredCalculations[index].active }; //$scope.filteredCalculations[index];
+		$scope.openCalculationModal(); 
 	};
 
 	// Reset edit form
