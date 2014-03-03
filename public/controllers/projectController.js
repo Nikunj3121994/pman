@@ -1,4 +1,4 @@
-function projectController($scope, projectFactory, MessageFactory, $log, $rootScope, customerFactory, leaderFactory, $modal) {
+function projectController($scope, $location, projectFactory, MessageFactory, $log, $rootScope, customerFactory, leaderFactory, $modal) {
 	$scope.formData = {};
 	$scope.projects = [];
 	
@@ -60,6 +60,14 @@ function projectController($scope, projectFactory, MessageFactory, $log, $rootSc
 
     $scope.go = function ( path ) {
 	  	$location.path( path );
+	};
+
+	$scope.setProjectActive = function (projectData) {
+	  	$scope.projectSelected = "true";
+	   	$rootScope.selectedProjectID = projectData.id;
+	    $rootScope.selectedProjectTitle = projectData.title;
+	    $rootScope.selectedProject_id = projectData._id;
+	    $location.path( '/projectCalculations' );
 	};
 	
 	

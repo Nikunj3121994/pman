@@ -5,6 +5,15 @@ function headerController($scope, $location, $modal, $log, $rootScope)
 	
 	function init() {
 		$scope.projectSelected = "false";
+		setUpProjectWatch();
+	}
+
+	function setUpProjectWatch(idproject) {
+		$rootScope.$watch('selectedProjectID', function () {
+	    	if($scope.selectedProjectID) {
+	    		$scope.projectSelected = "true";
+	    	}
+	    });
 	}
 
     $scope.isActive = function (viewLocation) { 

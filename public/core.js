@@ -37,7 +37,7 @@ leaderController.$inject = ['$scope', 'leaderFactory', 'MessageFactory', '$log',
 leaderModalController.$inject = ['$scope', '$modalInstance','leaderFactory', 'MessageFactory', '$log', '$rootScope'];
 calculationController.$inject = ['$scope', 'calculationFactory', 'MessageFactory', '$log', '$rootScope', '$modal'];
 calculationModalController.$inject = ['$scope', '$modalInstance', 'calculationFactory', 'MessageFactory', '$log', '$rootScope'];
-projectController.$inject = ['$scope', 'projectFactory', 'MessageFactory', '$log', '$rootScope', 'customerFactory', 'leaderFactory', '$modal'];
+projectController.$inject = ['$scope', '$location', 'projectFactory', 'MessageFactory', '$log', '$rootScope', 'customerFactory', 'leaderFactory', '$modal'];
 projectModalController.$inject = ['$scope', '$modalInstance','projectFactory', 'MessageFactory', '$log', '$rootScope', 'customerFactory', 'leaderFactory'];
 projectSelectModalController.$inject = ['$scope', '$modalInstance','projectFactory', '$log', '$rootScope'];
 
