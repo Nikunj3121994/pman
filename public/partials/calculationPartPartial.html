@@ -1,8 +1,9 @@
 <div class="container">
 	<div id="calculationpart-list" class="row">
+		<button type="submit" class="btn btn-primary" ng-click="addNewPart()">Lagre</button>
 		<tabset>
 		    <tab heading="Static title">Static content</tab>
-		    <tab ng-repeat="calculationPart in calculationParts" heading="{{calculationPart.title}}" active="tab.active" disabled="tab.disabled">
+		    <tab ng-repeat="calculationPart in getCalculationParts()" active="tab.active" disabled="tab.disabled">
 		      	<tab-heading>
 		        	{{calculationPart.title}}
 		      	</tab-heading>

@@ -39,7 +39,10 @@
 								<button type="button" alt="Rediger kalkyle" style="border: 1px; background-color: transparent">
 									<span class="glyphicon glyphicon-pencil" ng-click="editCalculation($index)"></span>
 								</button>
-								<a href="#/calculationParts" title="Åpne delkalkyler for {{calculation.title}}"><span class="glyphicon glyphicon-new-window"></span></a>
+								<button type="button" alt="Åpne delkalkyler for {{calculation.title}}" style="border: 1px; background-color: transparent">
+									<span class="glyphicon glyphicon-new-window" ng-click="openCalculation($index)"></span>
+								</button>
+								<!--<a href="#/calculationParts" title="Åpne delkalkyler for {{calculation.title}}"><span class="glyphicon glyphicon-new-window"></span></a>-->
 							</td>
 
 						</tr>

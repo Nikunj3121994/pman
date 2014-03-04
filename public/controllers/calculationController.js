@@ -1,6 +1,7 @@
-function calculationController($scope, calculationFactory, MessageFactory, $log, $rootScope, $modal) {
+function calculationController($scope, $location, calculationFactory, MessageFactory, $log, $rootScope, $modal) {
 	$scope.formData = {};
 	$scope.calculations = [];
+	$scope.activeCalculation = {};
 	
 	// when loading controller, initialize calculation list from calculationFactory
 	init();
@@ -41,6 +42,27 @@ function calculationController($scope, calculationFactory, MessageFactory, $log,
 			}
 		});
 	}
+
+	// Get all parts from avtive calculation
+	$scope.getCalculationParts = function() {
+		return $scope.activeCalculation._parts;
+	}
+
+	// Adds new part to active calculation
+	$scope.addNewPart = function() {
+		$log.info($scope.activeCalculation)
+		$scope.activeCalculation._parts.push({title: 'Test', type: 'Test type', active: 'Active test'})
+	}
+
+	// Show details for one calculation
+	$scope.openCalculation = function(index) {
+		$scope.activeCalculation = $scope.filteredCalculations[index];
+		$log.info($scope.filteredCalculations[index]);
+		$log.info($scope.activeCalculation);
+		$location.path( '/calculationParts' );
+	};
+
+
 
 	$scope.changePage=function(add){
         if(!add) {

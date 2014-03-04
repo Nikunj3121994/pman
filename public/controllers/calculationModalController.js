@@ -7,7 +7,7 @@ var calculationModalController = function ($scope, $modalInstance, calculationFa
 
 			calculationFactory.addCalculation($scope.formData).then(function(data) {
 				if(!$rootScope.RHE(data, true)) {
-					$scope.calculations.push(data. data);
+					$scope.calculations.push(data.data);
 					$scope.formData = {};
 
 					$modalInstance.close('opprettet');
