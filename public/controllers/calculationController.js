@@ -2,6 +2,7 @@ function calculationController($scope, $location, calculationFactory, MessageFac
 	$scope.formData = {};
 	$scope.calculations = [];
 	$scope.activeCalculation = {};
+	$scope.hideCalcList = false;
 	
 	// when loading controller, initialize calculation list from calculationFactory
 	init();
@@ -19,6 +20,14 @@ function calculationController($scope, $location, calculationFactory, MessageFac
 		//preparePage();	
 		//setUpProjectWatch();
     	
+	}
+
+	$scope.getCalcListViewStatus = function() {
+		return $scope.hideCalcList;
+	}
+
+	$scope.toggleCalcListView = function(state) {
+		$scope.hideCalcList = state;
 	}
 
 	function setUpProjectWatch(idproject) {

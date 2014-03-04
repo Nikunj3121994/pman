@@ -1,60 +1,66 @@
 <div class="container">
-	<div id="calculation-list" class="row">
-		<div> <!--class="col-xs-6"-->
-			<div class="panel panel-default">
-			  	<div class="panel-heading">
-			  		<table style="width: 100%">
-			  			<tr>
-			  				<td>Kalkyleoversikt for {{selectedProjectID}} - {{selectedProjectTitle}}</td>
-			  				<td style="text-align: right;">			  					
-			  					<button type="button" title="Ny kunde" style="border: 1px; background-color: transparent">
-									<span class="glyphicon glyphicon-plus" ng-click="openCalculationModal()"></span>
-								</button>
-			  				</td>
-			  			</tr>
-			  		</table>
-			  	</div>
-			  	<div class="panel-body">
-			  		<div class="input-group">
-			            <input type="text" class="form-control" placeholder="Søk i kalkyler" name="srch-term" id="srch-term" ng-model="searchCalculation">
-			            <div class="input-group-btn">
-			                <button class="btn btn-default" ng-click="resetSearch()" ng-model="searchCalculation"><i class="glyphicon glyphicon-remove-circle"></i></button>
-			            </div>
-			        </div><br/>
-			    	<table class="table table-hover">
-			    		<tr>
-			    			<th>Tittel</th>
-			    			<th>Type</th>
-			    			<th>Status</th>
-			    			<th></th>
-			    		</tr>
-						<tr ng-repeat="calculation in (filteredCalculations = (calculations | filter:searchCalculation)) | startFrom:currentPage*pageSize | limitTo:pageSize">
-							<td>{{calculation.title}}</td>
-							<td>{{calculation.type}}</td>
-							<td>{{calculation.active}}</td>
-							<td>
-								<button type="button" alt="Slett kalkyle" style="border: 1px; background-color: transparent">
-									<span class="glyphicon glyphicon-remove" ng-click="deleteCalculation(calculation._id)"></span>
-								</button>
-								<button type="button" alt="Rediger kalkyle" style="border: 1px; background-color: transparent">
-									<span class="glyphicon glyphicon-pencil" ng-click="editCalculation($index)"></span>
-								</button>
-								<button type="button" alt="Åpne delkalkyler for {{calculation.title}}" style="border: 1px; background-color: transparent">
-									<span class="glyphicon glyphicon-new-window" ng-click="openCalculation($index)"></span>
-								</button>
-								<!--<a href="#/calculationParts" title="Åpne delkalkyler for {{calculation.title}}"><span class="glyphicon glyphicon-new-window"></span></a>-->
-							</td>
+	<div>
+		<button class="btn btn-default" ng-click="toggleCalcListView(!hideCalcList)">Toggle collapse</button>
+		<hr>
+		<div collapse="getCalcListViewStatus()">
+			<div id="calculation-list" class="row">
+				<div> <!--class="col-xs-6"-->
+					<div class="panel panel-default">
+					  	<div class="panel-heading">
+					  		<table style="width: 100%">
+					  			<tr>
+					  				<td>Kalkyleoversikt for {{selectedProjectID}} - {{selectedProjectTitle}}</td>
+					  				<td style="text-align: right;">			  					
+					  					<button type="button" title="Ny kunde" style="border: 1px; background-color: transparent">
+											<span class="glyphicon glyphicon-plus" ng-click="openCalculationModal()"></span>
+										</button>
+					  				</td>
+					  			</tr>
+					  		</table>
+					  	</div>
+					  	<div class="panel-body">
+					  		<div class="input-group">
+					            <input type="text" class="form-control" placeholder="Søk i kalkyler" name="srch-term" id="srch-term" ng-model="searchCalculation">
+					            <div class="input-group-btn">
+					                <button class="btn btn-default" ng-click="resetSearch()" ng-model="searchCalculation"><i class="glyphicon glyphicon-remove-circle"></i></button>
+					            </div>
+					        </div><br/>
+					    	<table class="table table-hover">
+					    		<tr>
+					    			<th>Tittel</th>
+					    			<th>Type</th>
+					    			<th>Status</th>
+					    			<th></th>
+					    		</tr>
+								<tr ng-repeat="calculation in (filteredCalculations = (calculations | filter:searchCalculation)) | startFrom:currentPage*pageSize | limitTo:pageSize">
+									<td>{{calculation.title}}</td>
+									<td>{{calculation.type}}</td>
+									<td>{{calculation.active}}</td>
+									<td>
+										<button type="button" alt="Slett kalkyle" style="border: 1px; background-color: transparent">
+											<span class="glyphicon glyphicon-remove" ng-click="deleteCalculation(calculation._id)"></span>
+										</button>
+										<button type="button" alt="Rediger kalkyle" style="border: 1px; background-color: transparent">
+											<span class="glyphicon glyphicon-pencil" ng-click="editCalculation($index)"></span>
+										</button>
+										<button type="button" alt="Åpne delkalkyler for {{calculation.title}}" style="border: 1px; background-color: transparent">
+											<span class="glyphicon glyphicon-new-window" ng-click="openCalculation($index)"></span>
+										</button>
+										<!--<a href="#/calculationParts" title="Åpne delkalkyler for {{calculation.title}}"><span class="glyphicon glyphicon-new-window"></span></a>-->
+									</td>
 
-						</tr>
-					</table>
+								</tr>
+							</table>
 
-					<ul class="pagination">
-					  <li><a href="" ng-click="changePage(false)">&laquo;</a></li>
-					  <li><span>{{currentPage+1}}/{{numberOfPages()}}</span></li>
-					  <li><a href="" ng-click="changePage(true)">&raquo;</a></li>
-					</ul>
+							<ul class="pagination">
+							  <li><a href="" ng-click="changePage(false)">&laquo;</a></li>
+							  <li><span>{{currentPage+1}}/{{numberOfPages()}}</span></li>
+							  <li><a href="" ng-click="changePage(true)">&raquo;</a></li>
+							</ul>
 
-			  	</div>
+					  	</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
