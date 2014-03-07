@@ -70,50 +70,6 @@ function projectController($scope, $location, projectFactory, MessageFactory, $l
 	    $location.path( '/projectCalculations' );
 	};
 	
-	
-	// Create new project using projectFactory
-	/*$scope.createProject = function() {
-		if( $scope.projectForm.$valid) {
-			projectFactory.addProject($scope.formData).then(function(data) {
-				if(!$rootScope.RHE(data, true)) {
-					$scope.projects.push(data. data);
-					$scope.formData = {};
-
-					MessageFactory.prepareForBroadcast('Nytt prosjekt opprettet', 'label label-success');
-				} else {
-					MessageFactory.prepareForBroadcast('Det oppstod en feil under oppretting av nytt prosjekt', 'label label-danger');
-				}
-			});	
-		} else {
-			MessageFactory.prepareForBroadcast('Kontroller felter med rød -', 'label label-warning');	
-		}
-	};*/
-
-	// Create new project using projectFactory
-	/*$scope.updateProject = function(id) {
-		if( $scope.projectForm.$valid) {
-			projectFactory.updateProject($scope.formData, id).then(function(data) {
-				if(!$rootScope.RHE(data, true)) {
-					for (var i = 0; i < $scope.projects.length; i++) {
-						if ($scope.projects[i]._id === id) {
-							$scope.projects[i] = data.data;
-							break;
-						}
-					}
-					$scope.showSaveButton = true;
-					$scope.showUpdateButton = false;	
-					$scope.formData = {};
-
-					MessageFactory.prepareForBroadcast('Prosjekt oppdatert', 'label label-success');
-				} else {
-					MessageFactory.prepareForBroadcast('Det oppstod en feil under oppdatering av prosjekt', 'label label-danger');
-				}
-			});	
-		} else {
-			MessageFactory.prepareForBroadcast('Kontroller felter med rød -', 'label label-warning');	
-		}
-	};*/
-
 	// Put project to edit in edit form
 	$scope.editProject = function(index) {
 		$scope.showSaveButton = false;
@@ -155,24 +111,40 @@ function projectController($scope, $location, projectFactory, MessageFactory, $l
 
 	// delete project using projectFactory
 	$scope.deleteProject = function(id) {
-		bootbox.confirm("Er du sikker på at du vil slette?", function(result) {
-			if(result) {
-				projectFactory.deleteProject(id).then(function(data) {
-					if(!$rootScope.RHE(data, false)) {
-						for (var i = 0; i < $scope.projects.length; i++) {
-							if ($scope.projects[i]._id === id) {
-								$scope.projects.splice(i, 1);
-								break;
-							}
-						}
+		var promptOptions = {
+			title: "Slett prosjekt",
+			message: "Er du sikker på at du vil slette?",
+			buttons: {
+				confirm: {
+					label: "Ja",
+					className: "btn-danger",
+				},
+				cancel: {
+			    	label: "Nei",
+			    	className: "btn-primary",
+			    }
+			  },
+			  callback: function(result) {                
+			      	if(result) {
+						projectFactory.deleteProject(id).then(function(data) {
+							if(!$rootScope.RHE(data, false)) {
+								for (var i = 0; i < $scope.projects.length; i++) {
+									if ($scope.projects[i]._id === id) {
+										$scope.projects.splice(i, 1);
+										break;
+									}
+								}
 
-						MessageFactory.prepareForBroadcast('Prosjekt slettet', 'label label-success');
-					} else {
-						MessageFactory.prepareForBroadcast('Det oppstod en feil ved sletting av prosjekt', 'label label-danger');
+								MessageFactory.prepareForBroadcast('Prosjekt slettet', 'label label-success');
+							} else {
+								MessageFactory.prepareForBroadcast('Det oppstod en feil ved sletting av prosjekt', 'label label-danger');
+							}
+						});
 					}
-				});
-			}
-		});
+			    }
+			};
+
+		bootbox.confirm(promptOptions);	
 	};	
 }
 

@@ -5,9 +5,9 @@
 			  	<div class="panel-heading">
 			  		<table style="width: 100%">
 			  			<tr>
-			  				<td>Prosjektlederliste</td>
+			  				<td><h4>Prosjektlederoversikt</h4></td>
 			  				<td style="text-align: right;">
-			  					<button type="button" title="Ny prosjektleder" style="border: 1px; background-color: transparent">
+			  					<button type="button" title="Ny prosjektleder" class="btn btn-default">
 									<span class="glyphicon glyphicon-plus" ng-click="openLeaderModal()"></span>
 								</button>
 			  				</td>
@@ -29,11 +29,11 @@
 						<tr ng-repeat="leader in (filteredLeaders = (leaders | filter:searchLeader)) | startFrom:currentPage*pageSize | limitTo:pageSize">
 							<td>{{leader.name}}</td>
 							<td>
-								<button type="button" title="Slett prosjektleder" style="border: 1px; background-color: transparent">
-									<span class="glyphicon glyphicon-remove" ng-click="deleteLeader(leader._id)"></span>
+								<button type="button" title="Slett prosjektleder" style="border: 1px; background-color: transparent" ng-click="deleteLeader(leader._id)">
+									<span class="glyphicon glyphicon-remove"></span>
 								</button>
-								<button type="button" title="Rediger prosjektleder" style="border: 1px; background-color: transparent">
-									<span class="glyphicon glyphicon-pencil" ng-click="editLeader($index)"></span>
+								<button type="button" title="Rediger prosjektleder" style="border: 1px; background-color: transparent" ng-click="editLeader($index)">
+									<span class="glyphicon glyphicon-pencil"></span>
 								</button>
 							</td>
 

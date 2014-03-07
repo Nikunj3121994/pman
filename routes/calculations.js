@@ -80,7 +80,7 @@ module.exports = function(app, pool, ConnectionErrorCheck, QueryHasErrors, Retur
 			//Not implemented
 		} else { //MongoDB used as database
 			var query = { _id: req.params.id };
-			var update = { title: req.body.title, type: req.body.type, active: req.body.active, _project: req.body._project };
+			var update = { title: req.body.title, type: req.body.type, active: req.body.active, _project: req.body._project, _parts: req.body._parts};
 			Calculation.findOneAndUpdate(query, update, null, function(err, result) {
 				if(!QueryHasErrors(err, res)) {
 					console.log('Updated Calculation: ' + JSON.stringify(result));

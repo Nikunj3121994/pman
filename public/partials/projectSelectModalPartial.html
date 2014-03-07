@@ -1,4 +1,4 @@
-<div class="modal-dialog">
+<!--<div class="modal-dialog">-->
   <div class="modal-content">
     <div class="modal-header">
       <button type="button" class="close" ng-click="cancel()">&times;</button>
@@ -23,8 +23,10 @@
 						<td>{{project.idproject}}</td>
 						<td>{{project.title}}</td>
 						<td>
-							<button type="button" title="Velg prosjekt og returner" style="border: 1px; background-color: transparent">
-								<span class="glyphicon glyphicon-arrow-right" ng-click="selectProject({id: project.idproject, title: project.title, _id: project._id})"></span>
+							<button type="button" title="Velg prosjekt og returner" style="border: 1px; background-color: transparent" ng-click="selectProject({id: project.idproject, 
+							title: project.title, 
+							_id: project._id})">
+								<span class="glyphicon glyphicon-arrow-right"></span>
 							</button>
 						</td>
 
@@ -42,4 +44,4 @@
 		<button type="reset" class="btn btn-default" ng-show="showCancelButton" ng-click="cancel()">Avbryt</button>
     </div>
   </div>
-</div>
+<!--</div>-->

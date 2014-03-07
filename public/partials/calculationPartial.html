@@ -1,7 +1,5 @@
 <div class="container">
 	<div>
-		<button class="btn btn-default" ng-click="toggleCalcListView(!hideCalcList)">Toggle collapse</button>
-		<hr>
 		<div collapse="getCalcListViewStatus()">
 			<div id="calculation-list" class="row">
 				<div> <!--class="col-xs-6"-->
@@ -9,9 +7,9 @@
 					  	<div class="panel-heading">
 					  		<table style="width: 100%">
 					  			<tr>
-					  				<td>Kalkyleoversikt for {{selectedProjectID}} - {{selectedProjectTitle}}</td>
+					  				<td><h4>Kalkyleoversikt for {{selectedProjectID}} - {{selectedProjectTitle}}</h4></td>
 					  				<td style="text-align: right;">			  					
-					  					<button type="button" title="Ny kunde" style="border: 1px; background-color: transparent">
+					  					<button type="button" title="Ny kalkyle" class="btn btn-default">
 											<span class="glyphicon glyphicon-plus" ng-click="openCalculationModal()"></span>
 										</button>
 					  				</td>
@@ -37,16 +35,15 @@
 									<td>{{calculation.type}}</td>
 									<td>{{calculation.active}}</td>
 									<td>
-										<button type="button" alt="Slett kalkyle" style="border: 1px; background-color: transparent">
-											<span class="glyphicon glyphicon-remove" ng-click="deleteCalculation(calculation._id)"></span>
+										<button type="button" title="Slett kalkyle" class="btn btn-default" style="border: 1px; background-color: transparent" ng-click="deleteCalculation(calculation._id)">
+											<span class="glyphicon glyphicon-remove"></span>
 										</button>
-										<button type="button" alt="Rediger kalkyle" style="border: 1px; background-color: transparent">
-											<span class="glyphicon glyphicon-pencil" ng-click="editCalculation($index)"></span>
+										<button type="button" title="Rediger kalkyle" style="border: 1px; background-color: transparent" ng-click="editCalculation($index)">
+											<span class="glyphicon glyphicon-pencil"></span>
 										</button>
-										<button type="button" alt="Åpne delkalkyler for {{calculation.title}}" style="border: 1px; background-color: transparent">
-											<span class="glyphicon glyphicon-new-window" ng-click="openCalculation($index)"></span>
+										<button type="button" title="Vis kalkyledetaljer for {{calculation.title}}" style="border: 1px; background-color: transparent" ng-click="openCalculation($index)">
+											<span class="glyphicon glyphicon-th-list"></span>
 										</button>
-										<!--<a href="#/calculationParts" title="Åpne delkalkyler for {{calculation.title}}"><span class="glyphicon glyphicon-new-window"></span></a>-->
 									</td>
 
 								</tr>
@@ -58,6 +55,47 @@
 							  <li><a href="" ng-click="changePage(true)">&raquo;</a></li>
 							</ul>
 
+					  	</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div collapse="!getCalcListViewStatus()">
+			<div id="calculation-list" class="row">
+				<div> <!--class="col-xs-6"-->
+					<div class="panel panel-default">
+					  	<div class="panel-heading">
+					  		<table style="width: 100%">
+					  			<tr>
+					  				<td><h4>Kalkyledetaljer for {{activeCalculation.title}}</h4></td>
+					  				<td style="text-align: right;">		
+					  					<div class="btn-group">	  					
+						  					<button type="button" class="btn btn-default" title="Tilbake til kalkyleoversikt" ng-click="toggleCalcListView(!hideCalcList)">
+												<span class="glyphicon glyphicon-arrow-left"></span>
+											</button>
+						  					<button type="button" class="btn btn-default" title="Ny delkalkyle" ng-click="openCalculationPartModal()">
+												<span class="glyphicon glyphicon-plus"></span>
+											</button>
+											<button type="button" class="btn btn-default" title="Lagre kalkyle" ng-click="saveCalculation()">
+												<span class="glyphicon glyphicon-save" ng-class="buttonColor"></span>
+											</button>
+										<div>
+					  				</td>
+					  			</tr>
+					  		</table>
+					  	</div>
+					  	<div class="panel-body">
+					  		<!--<button class="btn btn-default" ng-click="toggleCalcListView(!hideCalcList)">Tilbake</button>
+							<button type="submit" class="btn btn-primary" ng-click="addNewPart()">Ny delkalkyle</button>-->
+							<tabset>
+							    <tab heading="Sammenstilling"><br/>Sammenstilling</tab>
+							    <tab ng-repeat="calculationPart in getCalculationParts()" active="tab.active" disabled="tab.disabled">
+							      	<tab-heading>
+							        	{{calculationPart.title}}
+							      	</tab-heading>
+							      	I've got an HTML heading, and a select callback. Pretty cool!
+							    </tab>
+							</tabset>
 					  	</div>
 					</div>
 				</div>

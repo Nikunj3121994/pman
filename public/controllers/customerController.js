@@ -39,50 +39,6 @@ function customerController($scope, customerFactory, MessageFactory, $log, $root
         return Math.ceil($scope.filteredCustomers.length/$scope.pageSize);                
     }
 
-	// Create new customer using customerFactory
-	/*$scope.createCustomer = function() {
-		if( $scope.customerForm.$valid) {
-			customerFactory.addCustomer($scope.formData).then(function(data) {
-				if(!$rootScope.RHE(data, true)) {
-					$scope.customers.push(data. data);
-					$scope.formData = {};
-
-					MessageFactory.prepareForBroadcast('Ny kunde opprettet', 'label label-success');
-				} else {
-					MessageFactory.prepareForBroadcast('Det oppstod en feil under oppretting av ny kunde', 'label label-danger');
-				}
-			});	
-		} else {
-			MessageFactory.prepareForBroadcast('Kontroller felter med rød -', 'label label-warning');	
-		}
-	};*/
-
-
-	// Update new customer using customerFactory
-	/*$scope.updateCustomer = function(id) {
-		if( $scope.customerForm.$valid) {
-			customerFactory.updateCustomer($scope.formData, id).then(function(data) {
-				if(!$rootScope.RHE(data, true)) {
-					for (var i = 0; i < $scope.customers.length; i++) {
-						if ($scope.customers[i]._id === id) {
-							$scope.customers[i] = data.data;
-							break;
-						}
-					}
-					$scope.showSaveButton = true;
-					$scope.showUpdateButton = false;	
-					$scope.formData = {};
-
-					MessageFactory.prepareForBroadcast('Kunde oppdatert', 'label label-success');
-				} else {
-					MessageFactory.prepareForBroadcast('Det oppstod en feil under oppdatering av kunde', 'label label-danger');
-				}
-			});	
-		} else {
-			MessageFactory.prepareForBroadcast('Kontroller felter med rød -', 'label label-warning');	
-		}
-	};*/
-
 	// Put customer to edit in edit form
 	$scope.editCustomer = function(index) {
 		$scope.showSaveButton = false;
@@ -121,24 +77,40 @@ function customerController($scope, customerFactory, MessageFactory, $log, $root
 
 	// delete customer using customerFactory
 	$scope.deleteCustomer = function(id) {
-		bootbox.confirm("Er du sikker på at du vil slette?", function(result) {
-			if(result) {
-				customerFactory.deleteCustomer(id).then(function(data) {
-					if(!$rootScope.RHE(data, false)) {
-						for (var i = 0; i < $scope.customers.length; i++) {
-							if ($scope.customers[i]._id === id) {
-								$scope.customers.splice(i, 1);
-								break;
-							}
-						}
+		var promptOptions = {
+			title: "Slett kunde",
+			message: "Er du sikker på at du vil slette?",
+			buttons: {
+				confirm: {
+					label: "Ja",
+					className: "btn-danger",
+				},
+				cancel: {
+			    	label: "Nei",
+			    	className: "btn-primary",
+			    }
+			  },
+			  callback: function(result) {                
+			      	if(result) {
+						customerFactory.deleteCustomer(id).then(function(data) {
+							if(!$rootScope.RHE(data, false)) {
+								for (var i = 0; i < $scope.customers.length; i++) {
+									if ($scope.customers[i]._id === id) {
+										$scope.customers.splice(i, 1);
+										break;
+									}
+								}
 
-						MessageFactory.prepareForBroadcast('Kunde slettet', 'label label-success');
-					} else {
-						MessageFactory.prepareForBroadcast('Det oppstod en feil ved sletting av kunde', 'label label-danger');
+								MessageFactory.prepareForBroadcast('Kunde slettet', 'label label-success');
+							} else {
+								MessageFactory.prepareForBroadcast('Det oppstod en feil ved sletting av kunde', 'label label-danger');
+							}
+						});
 					}
-				});
-			}
-		});
+			    }
+			};
+
+		bootbox.confirm(promptOptions);	
 	};	
 }
 

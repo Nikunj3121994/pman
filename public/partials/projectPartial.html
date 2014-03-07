@@ -5,9 +5,9 @@
 			  	<div class="panel-heading">
 			  		<table style="width: 100%">
 			  			<tr>
-			  				<td>Prosjektliste</td>
+			  				<td><h4>Prosjektoversikt</h4></td>
 			  				<td style="text-align: right;">
-			  					<button type="button" title="Nytt prosjekt" style="border: 1px; background-color: transparent">
+			  					<button type="button" title="Nytt prosjekt" class="btn btn-default">
 									<span class="glyphicon glyphicon-plus" ng-click="openProjectModal()"></span>
 								</button>
 			  				</td>
@@ -31,17 +31,16 @@
 							<td>{{project.idproject}}</td>
 							<td>{{project.title}}</td>
 							<td>
-								<button type="button" title="Slett prosjekt" style="border: 1px; background-color: transparent">
-									<span class="glyphicon glyphicon-remove" ng-click="deleteProject(project._id)"></span>
+								<button type="button" title="Slett prosjekt" style="border: 1px; background-color: transparent" ng-click="deleteProject(project._id)">
+									<span class="glyphicon glyphicon-remove"></span>
 								</button>
-								<button type="button" title="Rediger prosjekt" style="border: 1px; background-color: transparent">
-									<span class="glyphicon glyphicon-pencil" ng-click="editProject($index)"></span>
+								<button type="button" title="Rediger prosjekt" style="border: 1px; background-color: transparent" ng-click="editProject($index)">
+									<span class="glyphicon glyphicon-pencil"></span>
 								</button>
-								<button type="button" title="Aktiver prosjekt og gå til kalkyler" style="border: 1px; background-color: transparent">
-									<span class="glyphicon glyphicon-arrow-right" ng-click="setProjectActive({id: project.idproject, 
-																												  title: project.title, 
-																												  _id: project._id})">
-									</span>
+								<button type="button" title="Aktiver prosjekt og gå til kalkyler" style="border: 1px; background-color: transparent"  ng-click="setProjectActive({id: project.idproject, 
+																																							    title: project.title, 
+																																							    _id: project._id})">
+									<span class="glyphicon glyphicon-arrow-right"></span>
 								</button>
 							</td>
 						</tr>
